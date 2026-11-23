@@ -140,10 +140,10 @@ header.top{position:sticky;top:0;z-index:55;display:flex;align-items:center;gap:
 .qty-num{font-size:72px;font-weight:900;line-height:.9}
 .qty-num small{font-size:18px;font-weight:900}
 .qty-btns{display:flex;gap:8px;margin-top:12px}
-.qbtn{width:42px;height:42px;border:1px solid rgba(217,70,239,.6);background:transparent;color:var(--y2);font-size:18px;font-weight:900}
+.qbtn{width:42px;height:42px;border:1px solid rgba(217,70,239,.6);background:transparent;color:var(--y2);font-size:18px;font-weight:900;white-space:nowrap}
 .qbtn:hover{background:rgba(217,70,239,.18)}
 .qbtn:disabled{opacity:.3;cursor:not-allowed}
-.yagent{height:42px;padding:0 16px;background:var(--grad);color:#fff;border:none;font-weight:900;font-family:var(--mono);letter-spacing:.06em}
+.yagent{height:42px;padding:0 16px;background:var(--grad);color:#fff;border:none;font-weight:900;font-family:var(--mono);letter-spacing:.06em;white-space:nowrap}
 .payrows{border-top:1px solid var(--line2);margin-top:20px}
 .payrow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2);font-size:14px}
 .payrow b{font-family:var(--mono);font-size:15px}
@@ -222,7 +222,7 @@ header.top{position:sticky;top:0;z-index:55;display:flex;align-items:center;gap:
 .swap-panel .sw .big{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px}
 .swap-panel .sw .bal{font-size:12.5px;color:var(--mut);margin-top:6px}
 /* swap estimator (MENUKAR): display only, no web3 */
-.swap-box{border:1px solid rgba(217,70,239,.5);padding:18px 20px}
+.swap-box{border:1px solid rgba(217,70,239,.5);padding:18px 20px;max-width:680px;margin-inline:auto}
 .swap-input-row{display:flex;align-items:center;gap:12px}
 .swap-input{flex:1;min-width:0}
 .swap-token{font-family:var(--mono);font-weight:700;font-size:15px;white-space:nowrap;color:#fff}
@@ -259,8 +259,8 @@ footer{margin-top:70px}
 .foot-risk{color:var(--mut2);font-size:12.5px;padding:18px 0 30px}
 .modal{position:fixed;inset:0;background:rgba(5,7,15,.75);display:none;place-items:center;z-index:100;padding:18px}
 .modal.open{display:grid}
-.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--panel);color:var(--y2);font-weight:700;font-size:14px;padding:13px 20px;z-index:120;transition:transform .3s;max-width:92vw;text-align:center;border:1px solid rgba(217,70,239,.6)}
-.toast.show{transform:translate(-50%,0)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--panel);color:var(--y2);font-weight:700;font-size:14px;padding:13px 20px;z-index:120;transition:transform .3s,visibility .3s;max-width:92vw;text-align:center;border:1px solid rgba(217,70,239,.6);visibility:hidden}
+.toast.show{transform:translate(-50%,0);visibility:visible}
 #scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:59;display:none}
 @media (max-width:1100px){.stat-grid{grid-template-columns:1fr 1fr}.chart-panels{grid-template-columns:1fr}}
 @media (max-width:900px){
@@ -288,6 +288,30 @@ footer{margin-top:70px}
   .spec .dots{display:none}
   .spec .sv{flex-basis:100%;text-align:left;font-size:14.5px}
   .spec .sn{font-size:14.5px;white-space:normal}
+  /* ---- polish: mobile tap targets >=44px ---- */
+  .burger,.icobtn{width:44px;height:44px}
+  .langbtn{height:44px;min-width:48px}
+  .cta-top{height:44px}
+  .qbtn{width:44px;height:44px}
+  .yagent{height:44px}
+  .modebtn{min-height:44px}
+  .swap-chips .chip{min-height:44px;display:inline-flex;align-items:center}
+  .brand .fold{width:32px;height:32px;min-height:32px}
+  /* ---- polish: mini3 stacks so values never wrap unevenly (ZH + EN) ---- */
+  .mini3{grid-template-columns:1fr}
+  .mini3>div+div{border-left:none;border-top:1px solid var(--line2);padding-left:0}
+  /* ---- polish: stat units on their own line so all 4 stat cards match ---- */
+  .stat .v small{display:block;margin-top:3px}
+  /* ---- polish: tier chart scrolls horizontally instead of shrinking text ---- */
+  .chart-panel{overflow-x:auto}
+  .chart-panel svg{min-width:520px}
+  /* ---- polish: tier rows fit 360px without mid-number wraps ---- */
+  .trow{grid-template-columns:40px 1fr auto auto;font-size:12px;gap:6px;padding:12px 8px}
+  .trow .rng{white-space:nowrap}
+  /* ---- polish: slimmer qty stackbars so the builder fits a phone screen ---- */
+  .stackbars{width:76px;gap:3px}
+  .stackbars i{height:9px}
+  .qty-zone{gap:16px}
 }
 @media (prefers-reduced-motion:reduce){.tk-track,.faq .ans .cur{animation:none}html{scroll-behavior:auto}}
 </style>
@@ -1519,7 +1543,7 @@ setMode("A");
     var r1=el("swapRateBnb");
     if(r1) r1.textContent="1 BNB ≈ "+fmtYag(rate)+" YAGENT";
     var r2=el("swapRateYag");
-    if(r2) r2.textContent="1 YAGENT ≈ "+fmtBnbTiny(1/rate)+" BNB";
+    if(r2) r2.textContent=fmtBnbTiny(1/rate)+" BNB";
     var tn=el("swapTierNote");
     if(tn) tn.textContent=t("当前第 "+swapEpoch()+" 档 · 每档 +30%","Current tier "+swapEpoch()+" · +30% per tier");
     var gn=el("swapGetNote");
