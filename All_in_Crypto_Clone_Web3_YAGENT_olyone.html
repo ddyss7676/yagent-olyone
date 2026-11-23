@@ -221,24 +221,44 @@ header.top{position:sticky;top:0;z-index:55;display:flex;align-items:center;gap:
 .swap-panel .sw .l{font-size:13px;color:var(--mut)}
 .swap-panel .sw .big{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px}
 .swap-panel .sw .bal{font-size:12.5px;color:var(--mut);margin-top:6px}
-/* swap estimator (MENUKAR): display only, no web3 */
-.swap-box{border:1px solid rgba(217,70,239,.5);padding:18px 20px;max-width:680px;margin-inline:auto}
-.swap-input-row{display:flex;align-items:center;gap:12px}
+/* swap widget (MENUKAR): PancakeSwap-style card, display only, no web3.
+   Two stacked input boxes + circular flip button + rate rows + full-width CTA.
+   Outer box keeps the page's chamfered cut; inner boxes use PancakeSwap's
+   rounded input-box look. Colours/fonts stay OlyOne (no PancakeSwap brand). */
+.swap-box{border:1px solid rgba(217,70,239,.5);background:var(--panel);padding:20px;max-width:680px;margin-inline:auto}
+.sw-field{background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:14px;padding:16px 18px 26px}
+.sw-field:focus-within{border-color:rgba(217,70,239,.6)}
+.sw-field.sw-get{padding-top:26px}
+.sw-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sw-top .l{font-size:13px;color:var(--mut)}
+.sw-top .bal{font-size:12.5px;color:var(--mut);text-align:right}
+.sw-mid{display:flex;align-items:center;gap:12px;margin-top:10px}
 .swap-input{flex:1;min-width:0}
-.swap-token{font-family:var(--mono);font-weight:700;font-size:15px;white-space:nowrap;color:#fff}
+.swap-box .swap-input{background:transparent;border:none;padding:0;margin-top:0;font-size:28px;font-weight:700;color:#fff}
+.swap-box .swap-input:focus{outline:none;border-color:transparent;box-shadow:none}
+.swap-box .swap-input::placeholder{color:var(--mut2)}
+.swap-token{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 7px;font-family:var(--mono);font-weight:700;font-size:15px;white-space:nowrap;color:#fff;flex:none}
+.swap-token .tok-bnb{margin-right:0;vertical-align:0}
 .tok-bnb{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#f0b90b;color:#111;font-size:13px;font-weight:900;margin-right:6px;vertical-align:-5px}
-.swap-chips{display:flex;gap:8px;flex-wrap:wrap}
+.tok-yag{width:22px;height:22px}
+.swap-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .swap-chips .chip{cursor:pointer;background:transparent}
 .swap-chips .chip:hover{background:rgba(217,70,239,.18)}
 .swap-chips .chip.on{background:var(--grad);color:#fff;border-color:transparent}
-.swap-arrow{text-align:center;font-size:22px;color:var(--y2);line-height:1.2;padding:8px 0 4px}
-.swap-get{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px;word-break:break-all}
-.swap-get small{font-size:14px;color:var(--mut);white-space:nowrap}
+.swap-box[data-dir="yag"] .swap-chips{display:none}
+.swap-flip{display:flex;justify-content:center;height:0;position:relative;z-index:2}
+.swap-flip button{width:44px;height:44px;min-height:44px;border-radius:50%;background:var(--grad);color:#fff;border:3px solid var(--panel);font-size:20px;line-height:1;padding:0;transform:translateY(-50%);box-shadow:0 2px 10px rgba(0,0,0,.5);flex:none}
+.swap-flip button:hover{filter:brightness(1.15)}
+.swap-get{font-family:var(--mono);font-size:28px;font-weight:700;flex:1;min-width:0;word-break:break-all}
 .swap-rates{border-top:1px dashed var(--line);margin-top:16px;padding-top:12px;display:grid;gap:8px}
 .swap-rates .rr{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;align-items:baseline;flex-wrap:wrap}
 .swap-rates .rr>span:first-child{white-space:nowrap}
 .swap-rates .rr .mono{font-family:var(--mono)}
 .swap-note{font-size:12.5px;color:var(--mut);margin-top:12px;line-height:1.6}
+.swap-cta{display:flex;justify-content:center;width:100%;margin-top:16px;padding:16px 22px;font-size:16px;border-radius:14px}
+.swap-alt{text-align:center;margin-top:12px}
+.swap-alt a{color:var(--y2);font-size:13.5px;font-weight:700;text-decoration:none}
+.swap-alt a:hover{text-decoration:underline}
 .addr-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(217,70,239,.4)}
 .addr-grid>div{padding:13px 16px;border-bottom:1px solid rgba(217,70,239,.4)}
 .addr-grid>div:nth-child(odd){border-right:1px solid rgba(217,70,239,.4)}
@@ -312,6 +332,15 @@ footer{margin-top:70px}
   .stackbars{width:76px;gap:3px}
   .stackbars i{height:9px}
   .qty-zone{gap:16px}
+  /* ---- swap widget: amount on its own line, token pill below-right, so long
+     outputs (5,384,615,385) never wrap mid-number at 360px ---- */
+  .sw-top{flex-wrap:wrap;row-gap:4px}
+  .sw-top .bal{text-align:left}
+  .sw-mid{flex-wrap:wrap}
+  .sw-mid .swap-input,.sw-mid .swap-get{flex-basis:100%;font-size:22px}
+  .swap-token{margin-left:auto}
+  .sw-field{padding:14px 14px 24px}
+  .sw-field.sw-get{padding-top:24px}
 }
 @media (prefers-reduced-motion:reduce){.tk-track,.faq .ans .cur{animation:none}html{scroll-behavior:auto}}
 </style>
@@ -382,7 +411,7 @@ footer{margin-top:70px}
         <p class="lede">持有 Agent ID 就能铸造 $YAGENT。规则全部写在合约里：单价 0.0013 BNB 起，每档 +30%；Pool A 每份 2,000,000 枚起，每 1,000 份减半；Pool B 每份 20,000,000 枚起，每 10,000 份减半；46% 铸造后自动开池 3x；邀请好友每人让你的免费额度 +1。</p>
         <div class="stat3">
           <div><div class="lab">下一份</div><div class="val">0.0013 <small>BNB</small></div></div>
-          <div><div class="lab">已铸造</div><div class="val">29,700</div></div>
+          <div><div class="lab">已铸造</div><div class="val">7,700</div></div>
           <div><div class="lab">状态</div><div class="val"><span class="dot"></span><span class="zh">铸造中 · 46% 开池</span></div></div>
         </div>
         <div class="cta-row">
@@ -396,8 +425,8 @@ footer{margin-top:70px}
           <h3>铸造进度</h3>
           <p class="cd">全网铸造与开池进度（显示）。</p>
           <div style="margin-top:14px">
-            <div class="tot-row"><span>全网已铸造</span><span><b>29,700</b> / 110,000</span></div>
-            <div class="tot-row"><span>开池进度</span><span><b>67.1B</b> / 248.4B</span></div>
+            <div class="tot-row"><span>全网已铸造</span><span><b>7,700</b> / 110,000</span></div>
+            <div class="tot-row"><span>开池进度</span><span><b>17.4B</b> / 248.4B</span></div>
             <div class="segbar" aria-hidden="true"></div>
             <p class="cd" style="margin-top:12px">铸造满 46% 后自动在 PancakeSwap 开池；开池前转账锁定，开池后自由交易。</p>
           </div>
@@ -474,8 +503,8 @@ footer{margin-top:70px}
             <div><div class="l">每天免费额度</div><div class="v">1 份</div></div>
           </div>
           <div class="pl-lab">开池进度</div>
-          <div class="tot-row"><span>全网已铸造</span><span><b>29,700</b> / 110,000</span></div>
-          <div class="tot-row"><span>开池进度</span><span><b>67.1B</b> / 248.4B</span></div>
+          <div class="tot-row"><span>全网已铸造</span><span><b>7,700</b> / 110,000</span></div>
+          <div class="tot-row"><span>开池进度</span><span><b>17.4B</b> / 248.4B</span></div>
           <div class="segbar" aria-hidden="true"></div>
           <p class="cd" id="mintNote" style="margin-top:14px">每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。</p>
         </div>
@@ -622,12 +651,12 @@ footer{margin-top:70px}
       <div class="card cut">
         <h3>兑换 $YAGENT</h3>
         <p class="cd">本页面不需要连接钱包；交易在 PancakeSwap 完成。开池前转账锁定，开池后自由交易。</p>
-        <div class="swap-box cut-sm" style="margin-top:18px">
-          <div class="sw-field">
-            <div class="l">你支付</div>
-            <div class="swap-input-row">
+        <div class="swap-box cut-sm" style="margin-top:18px" data-dir="bnb">
+          <div class="sw-field sw-pay">
+            <div class="sw-top"><span class="l">你支付</span><span class="bal" id="swapTierNote">当前第 1 档 · 每档 +30%</span></div>
+            <div class="sw-mid">
               <input id="swapBnbInput" class="agent-input swap-input" type="text" inputmode="decimal" value="0.0013" placeholder="输入 BNB 数量" autocomplete="off" spellcheck="false" />
-              <span class="swap-token"><span class="tok-bnb">B</span>BNB</span>
+              <span class="swap-token" id="swapPayToken"><span class="tok-bnb">B</span><span class="tok-sym">BNB</span></span>
             </div>
             <div class="swap-chips">
               <button type="button" class="chip swap-chip on" data-swap-amt="0.0013">0.0013</button>
@@ -635,23 +664,22 @@ footer{margin-top:70px}
               <button type="button" class="chip swap-chip" data-swap-amt="0.1">0.1</button>
               <button type="button" class="chip swap-chip" data-swap-amt="1">1</button>
             </div>
-            <div class="bal" id="swapTierNote">当前第 1 档 · 每档 +30%</div>
           </div>
-          <div class="swap-arrow" aria-hidden="true">↓</div>
-          <div class="sw-field">
-            <div class="l">你收到 <span class="bdg">估算</span></div>
-            <div class="swap-get"><span id="swapGetAmt">≈ 7,000,000</span> <small>YAGENT</small></div>
-            <div class="bal" id="swapGetNote">按展示汇率估算 · 非市场价</div>
+          <div class="swap-flip"><button type="button" id="swapFlipBtn" aria-label="切换兑换方向">⇅</button></div>
+          <div class="sw-field sw-get">
+            <div class="sw-top"><span class="l">你收到 <span class="bdg">估算</span></span><span class="bal" id="swapGetNote">按展示汇率估算 · 非市场价</span></div>
+            <div class="sw-mid">
+              <div class="swap-get"><span id="swapGetAmt">≈ 7,000,000</span></div>
+              <span class="swap-token" id="swapGetToken"><span class="logo-mark tok-yag" role="img" aria-label="YAGENT"></span><span class="tok-sym">YAGENT</span></span>
+            </div>
           </div>
           <div class="swap-rates">
             <div class="rr"><span>汇率</span><span class="mono" id="swapRateBnb">1 BNB ≈ 5,384,615,385 YAGENT</span></div>
             <div class="rr"><span>1 YAGENT ≈</span><span class="mono" id="swapRateYag">0.000000000186 BNB</span></div>
           </div>
-        </div>
-        <p class="swap-note">估算基于展示汇率 — 不是市场价。直接兑换在 PancakeSwap 于铸造满 46% 开池后开放；开池前转账锁定。</p>
-        <div class="cta-row">
-          <a class="btn-grad cut-sm" href="https://pancakeswap.finance/swap?outputCurrency=0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">在 PancakeSwap 交易</a>
-          <a class="btn-ghost" href="#analytics" data-page-link="analytics">看价格阶梯</a>
+          <p class="swap-note">估算基于展示汇率 — 不是市场价。直接兑换在 PancakeSwap 于铸造满 46% 开池后开放；开池前转账锁定。</p>
+          <a class="btn-grad swap-cta" href="https://pancakeswap.finance/swap?outputCurrency=0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">在 PancakeSwap 交易</a>
+          <div class="swap-alt"><a href="#analytics" data-page-link="analytics">看价格阶梯</a></div>
         </div>
         <div class="addr-grid cut-sm" style="margin-top:22px">
           <div><div class="l">代币地址</div><div class="v"><a href="https://bscscan.com/address/0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">0x84b8…6e67</a></div></div>
@@ -814,10 +842,10 @@ var START_PRICE=0.0013;
   el.innerHTML=html;
 })();
 
-/* ---------- segbars (11 of 40 filled) ---------- */
+/* ---------- segbars (3 of 40 filled) ---------- */
 document.querySelectorAll(".segbar").forEach(function(seg){
   var html="";
-  for(var i=0;i<40;i++) html+="<i class='"+(i<11?"f":"")+"'></i>";
+  for(var i=0;i<40;i++) html+="<i class='"+(i<3?"f":"")+"'></i>";
   seg.innerHTML=html;
 });
 
@@ -1533,13 +1561,28 @@ setMode("A");
     if(!isFinite(n)||n<=0) return "0";
     return n.toFixed(12).replace(/0+$/,"").replace(/\.$/,"");
   }
+  /* BNB output in reverse mode: the displayed YAGENT amount is rounded to
+     whole tokens, so dividing it back by the rate leaves ~1e-10 of noise
+     (e.g. 5,384,615,385 YAGENT -> 1.000000000071 BNB). Snap to 9 decimals
+     when the value is large enough that the snap is noise, not signal. */
+  function fmtBnbOut(n){
+    if(!isFinite(n)||n<=0) return "0";
+    if(n > 1e-6){
+      var r9 = Math.round(n*1e9)/1e9;
+      if(Math.abs(n - r9) < 1e-9) n = r9;
+    }
+    return fmtBnbTiny(n);
+  }
+  var swapDir=0; /* 0 = BNB -> YAGENT (default), 1 = YAGENT -> BNB (flipped) */
+  var PILL_BNB='<span class="tok-bnb">B</span><span class="tok-sym">BNB</span>';
+  var PILL_YAG='<span class="logo-mark tok-yag" role="img" aria-label="YAGENT"></span><span class="tok-sym">YAGENT</span>';
   function renderSwap(){
     var inp=el("swapBnbInput"); if(!inp) return;
     var amt=parseFloat(String(inp.value).replace(/,/g,"").trim());
     if(!isFinite(amt)||amt<0) amt=0;
     var rate=swapRate();
     var getEl=el("swapGetAmt");
-    if(getEl) getEl.textContent="≈ "+fmtYag(amt*rate);
+    if(getEl) getEl.textContent = swapDir===0 ? "≈ "+fmtYag(amt*rate) : "≈ "+fmtBnbOut(amt/rate);
     var r1=el("swapRateBnb");
     if(r1) r1.textContent="1 BNB ≈ "+fmtYag(rate)+" YAGENT";
     var r2=el("swapRateYag");
@@ -1548,7 +1591,9 @@ setMode("A");
     if(tn) tn.textContent=t("当前第 "+swapEpoch()+" 档 · 每档 +30%","Current tier "+swapEpoch()+" · +30% per tier");
     var gn=el("swapGetNote");
     if(gn) gn.textContent=t("按展示汇率估算 · 非市场价","Estimated at the displayed rate · not a market price");
-    try{ inp.placeholder=t("输入 BNB 数量","Enter BNB amount"); }catch(e){}
+    try{ inp.placeholder=t(swapDir===1?"输入 YAGENT 数量":"输入 BNB 数量", swapDir===1?"Enter YAGENT amount":"Enter BNB amount"); }catch(e){}
+    var fl=el("swapFlipBtn");
+    if(fl) fl.setAttribute("aria-label", t("切换兑换方向","Switch swap direction"));
     var chips=document.querySelectorAll(".swap-chip");
     chips.forEach(function(c){
       var v=parseFloat(c.getAttribute("data-swap-amt"));
@@ -1562,6 +1607,25 @@ setMode("A");
     var chips=document.querySelectorAll(".swap-chip");
     chips.forEach(function(c){
       c.addEventListener("click",function(){ inp.value=c.getAttribute("data-swap-amt"); renderSwap(); try{inp.focus();}catch(e){} });
+    });
+    /* flip button (PancakeSwap-style): swaps pay/receive tokens and direction.
+       The amount on the other side becomes the new input, so a round trip
+       restores the original values. Chips are BNB presets and hide in
+       YAGENT -> BNB mode (see .swap-box[data-dir="yag"]). */
+    var flipBtn=el("swapFlipBtn");
+    if(flipBtn) flipBtn.addEventListener("click",function(){
+      var amt=parseFloat(String(inp.value).replace(/,/g,"").trim());
+      if(!isFinite(amt)||amt<0) amt=0;
+      var rate=swapRate();
+      var other = swapDir===0 ? amt*rate : amt/rate;
+      swapDir = 1-swapDir;
+      inp.value = swapDir===1 ? fmtYag(other) : fmtBnbOut(other);
+      var pay=el("swapPayToken"), get=el("swapGetToken");
+      if(pay) pay.innerHTML = swapDir===1 ? PILL_YAG : PILL_BNB;
+      if(get) get.innerHTML = swapDir===1 ? PILL_BNB : PILL_YAG;
+      var box=document.querySelector(".swap-box");
+      if(box) box.setAttribute("data-dir", swapDir===1?"yag":"bnb");
+      renderSwap(); try{inp.focus();}catch(e){}
     });
     renderSwap();
   })();
