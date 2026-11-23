@@ -1,0 +1,1581 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<title>YAGENT · $YAGENT</title>
+<style>
+:root{
+  --y:#c026d3; --y2:#e879f9; --acc:#d946ef; --pur:#a855f7; --blu:#3b82f6;
+  --grad:linear-gradient(90deg,#e879f9,#a855f7 45%,#3b82f6);
+  --k:#05070f; --panel:#0d1326; --panel2:#111a33; --side:#0a0f22;
+  --line:rgba(148,163,184,.28); --line2:rgba(148,163,184,.16);
+  --txt:#eef2ff; --mut:rgba(226,232,240,.62); --mut2:rgba(226,232,240,.42);
+  --gold:#f5c518; --teal:#34d399; --red:#fb7185;
+  --sans:system-ui,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --logo:url("data:image/jpeg;base64,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");
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--k);color:var(--txt);font-family:var(--sans);
+  background-image:radial-gradient(900px 420px at 85% -10%,rgba(168,85,247,.16),transparent 60%),radial-gradient(700px 380px at 0% 0%,rgba(59,130,246,.12),transparent 55%);}
+::selection{background:var(--pur);color:#fff}
+button{font-family:inherit;cursor:pointer;min-height:36px}
+a{color:inherit}
+.mono{font-family:var(--mono)}
+.cut{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.cut-sm{clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px))}
+.logo-mark{background-image:var(--logo);background-size:cover;background-position:center;border-radius:50%;flex:none}
+
+/* ---------- app shell ---------- */
+#app{display:flex;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;background:var(--side);border-right:1px solid var(--line2);z-index:60;display:flex;flex-direction:column;padding:16px 14px 14px;overflow-y:auto;transition:width .2s,transform .25s}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 6px 14px;border-bottom:1px solid var(--line2)}
+.brand .logo-mark{width:42px;height:42px;box-shadow:0 0 0 2px rgba(217,70,239,.45)}
+.brand .bt{line-height:1}
+.brand .bt b{font-size:19px;font-weight:900;letter-spacing:.03em}
+.brand .bt small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--mut);margin-top:3px}
+.brand .fold{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--mut);width:26px;height:26px;min-height:26px;font-size:13px;line-height:1}
+.nav{flex:1;padding-top:6px}
+.nav-grp{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--mut2);text-transform:uppercase;margin:20px 8px 7px}
+.nav-grp:first-child{margin-top:12px}
+.nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.04em;color:rgba(238,242,255,.82);border-left:2px solid transparent}
+.nav a .ic{width:20px;text-align:center;font-size:15px;color:var(--mut);flex:none}
+.nav a:hover{color:#fff;background:rgba(168,85,247,.08)}
+.nav a.on{color:#f0abfc;background:linear-gradient(90deg,rgba(217,70,239,.20),transparent);border-left-color:var(--acc)}
+.nav a.on .ic{color:var(--y2)}
+.side-foot{border-top:1px solid var(--line2);padding-top:13px}
+.side-foot .sf-links{display:flex;gap:14px;flex-wrap:wrap;padding:0 6px}
+.side-foot .sf-links a{color:var(--y2);font-weight:700;font-size:12.5px;text-decoration:none}
+.side-foot .sf-links a:hover{text-decoration:underline}
+.side-addrs{margin-top:12px;padding:0 6px;font-family:var(--mono);font-size:11px;line-height:1.9;color:var(--mut)}
+.side-addrs b{color:var(--mut2);font-weight:600}
+.side-addrs a{color:var(--y2);text-decoration:none}
+body.folded .sidebar{width:78px}
+body.folded .sidebar .bt,body.folded .sidebar .nav a span.tx,body.folded .sidebar .nav-grp,body.folded .sidebar .side-foot{display:none}
+body.folded main{margin-left:78px}
+body.folded .brand{justify-content:center;padding-bottom:12px}
+body.folded .brand .fold{margin-left:0}
+body.folded .nav a{justify-content:center;padding:10px 0}
+main{flex:1;margin-left:270px;min-width:0;padding:0 28px 40px}
+header.top{position:sticky;top:0;z-index:55;display:flex;align-items:center;gap:10px;height:58px;background:rgba(5,7,15,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line2);margin:0 -28px;padding:0 28px}
+.burger{display:none;background:transparent;border:1px solid var(--line);color:var(--txt);width:38px;height:38px;font-size:17px}
+.bnb-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(250,204,21,.55);color:#facc15;font-family:var(--mono);font-size:12px;font-weight:700;padding:7px 11px;white-space:nowrap}
+.bnb-pill i{width:8px;height:8px;background:#facc15;border-radius:50%;display:inline-block}
+.hsp{flex:1}
+.icobtn{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);background:transparent;color:var(--txt);text-decoration:none}
+.icobtn:hover{border-color:var(--acc);color:var(--y2)}
+.icobtn svg{width:17px;height:17px;fill:currentColor;display:block}
+.langbtn{height:38px;min-width:44px;padding:0 10px;border:1px solid rgba(217,70,239,.6);background:transparent;color:var(--y2);font-family:var(--mono);font-weight:700;font-size:12px}
+.langbtn:hover{background:rgba(217,70,239,.16)}
+.cta-top{background:var(--grad);color:#fff;border:none;font-weight:900;font-size:14px;padding:0 18px;height:38px;box-shadow:0 0 18px rgba(168,85,247,.45);text-decoration:none;display:inline-flex;align-items:center}
+.cta-top:hover{filter:brightness(1.15)}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.page-head{display:flex;gap:16px;align-items:flex-start;margin:28px 0 20px}
+.ph-ic{width:48px;height:48px;flex:none;background:var(--grad);display:grid;place-items:center;font-size:22px;color:#fff;box-shadow:0 0 22px rgba(168,85,247,.5)}
+.page-head h1{margin:0;font-size:clamp(28px,4vw,40px);font-weight:900;line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+.page-head .ph-desc{color:var(--mut);font-size:14px;margin-top:7px}
+.card{background:linear-gradient(160deg,#121a35 0%,#0c1226 100%);border:1px solid var(--line);padding:22px;position:relative}
+.card::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(217,70,239,.7),transparent)}
+.card h3{margin:0 0 6px;font-size:19px;font-weight:900}
+.card .cd{color:var(--mut);font-size:13.5px;line-height:1.7;margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2x{display:grid;grid-template-columns:1.15fr 1fr;gap:16px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{padding:16px 18px}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase}
+.stat .v{font-family:var(--mono);font-size:24px;font-weight:700;margin-top:7px}
+.stat .v small{font-size:13px;font-weight:600;color:var(--mut)}
+.stat .v .zh{font-family:var(--sans);font-size:16px;font-weight:900}
+.dot{display:inline-block;width:9px;height:9px;background:var(--teal);margin-right:7px;vertical-align:1px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tag{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;padding:5px 10px;border:1px solid rgba(217,70,239,.55);color:var(--y2)}
+.tag.solid{background:var(--grad);color:#fff;border-color:transparent}
+.hero-card{overflow:hidden}
+.hero-card .wm{position:absolute;right:6px;bottom:-14px;font-size:110px;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(168,85,247,.16);pointer-events:none;letter-spacing:.02em}
+.hero-card h2.mega{margin:2px 0 0;font-size:clamp(52px,7vw,96px);font-weight:900;line-height:.92;text-transform:uppercase}
+.hero-card h2.mega .l2{color:transparent;-webkit-text-stroke:2px var(--y2)}
+.hero-card .lede{font-size:15.5px;line-height:1.75;color:rgba(238,242,255,.85);max-width:640px;margin:18px 0 0}
+.hero-card .logo-mark{width:64px;height:64px;box-shadow:0 0 0 2px rgba(217,70,239,.5),0 0 30px rgba(168,85,247,.5)}
+.stat3{display:grid;grid-template-columns:1fr 1fr 1.4fr;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin-top:24px}
+.stat3>div{padding:12px 14px 14px 0}
+.stat3>div+div{border-left:1px solid var(--line2);padding-left:14px}
+.stat3 .lab{font-size:12px;color:var(--mut);font-weight:500}
+.stat3 .val{font-family:var(--mono);font-size:24px;font-weight:700;margin-top:4px}
+.stat3 .val small{font-size:12px;font-weight:600;color:var(--mut)}
+.stat3 .val .zh{font-family:var(--sans);font-size:16px;font-weight:900}
+.cta-row{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.btn-grad{background:var(--grad);color:#fff;border:none;font-weight:900;font-size:15px;padding:13px 22px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;box-shadow:0 0 18px rgba(168,85,247,.4)}
+.btn-grad:hover{filter:brightness(1.15)}
+.btn-ghost{background:transparent;color:var(--y2);border:1px solid rgba(217,70,239,.6);font-weight:900;font-size:15px;padding:13px 22px;text-decoration:none;display:inline-flex;align-items:center}
+.btn-ghost:hover{background:rgba(217,70,239,.14)}
+.tot-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--mut);padding:7px 0}
+.tot-row b{font-family:var(--mono);color:var(--txt);font-size:15px}
+.segbar{display:flex;gap:2px;margin-top:10px}
+.segbar i{flex:1;height:14px;background:rgba(217,70,239,.16)}
+.segbar i.f{background:var(--grad)}
+.mini3{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin-top:18px}
+.mini3>div{padding:11px 10px 12px 0}
+.mini3>div+div{border-left:1px solid var(--line2);padding-left:12px}
+.mini3 .l{font-size:12px;color:var(--mut)}
+.mini3 .v{font-weight:900;font-size:15px;margin-top:5px}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.bdg{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;border:1px solid rgba(217,70,239,.6);color:var(--y2);padding:4px 9px}
+.bdg i{display:inline-block;width:7px;height:7px;background:var(--teal);margin-right:6px}
+.bdg.dim{border-color:var(--line);color:var(--mut)}
+.bigprice{font-family:var(--mono);font-size:clamp(44px,5vw,62px);font-weight:700;line-height:1;margin-top:8px}
+.bigprice small{font-size:16px;color:var(--mut);font-weight:600}
+.pl-lab{color:var(--mut);font-size:13px;margin-top:22px}
+.qty-zone{display:flex;gap:24px;align-items:flex-end;border-top:1px dashed var(--line);margin-top:16px;padding-top:20px}
+.stackbars{display:flex;flex-direction:column-reverse;gap:4px;width:120px}
+.stackbars i{display:block;height:11px;border:1px solid rgba(217,70,239,.55);background:repeating-linear-gradient(90deg,rgba(217,70,239,.35) 0 8px,transparent 8px 17px)}
+.stackbars i.f{background:var(--grad);background-image:none}
+.qty-num{font-size:72px;font-weight:900;line-height:.9}
+.qty-num small{font-size:18px;font-weight:900}
+.qty-btns{display:flex;gap:8px;margin-top:12px}
+.qbtn{width:42px;height:42px;border:1px solid rgba(217,70,239,.6);background:transparent;color:var(--y2);font-size:18px;font-weight:900}
+.qbtn:hover{background:rgba(217,70,239,.18)}
+.qbtn:disabled{opacity:.3;cursor:not-allowed}
+.yagent{height:42px;padding:0 16px;background:var(--grad);color:#fff;border:none;font-weight:900;font-family:var(--mono);letter-spacing:.06em}
+.payrows{border-top:1px solid var(--line2);margin-top:20px}
+.payrow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2);font-size:14px}
+.payrow b{font-family:var(--mono);font-size:15px}
+.agent-input{width:100%;box-sizing:border-box;background:#0a0f22;color:#fff;border:1px solid rgba(148,163,184,.4);padding:11px 12px;font-size:15px;font-family:var(--mono);margin-top:6px}
+.agent-input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 2px rgba(217,70,239,.25)}
+.refstatus{font-size:12.5px;line-height:1.6;margin-top:6px;min-height:18px}
+.refstatus.ok{color:#4ade80}
+.refstatus.bad{color:#fb7185}
+.promptbox{margin-top:6px;border:1px solid rgba(217,70,239,.5);background:rgba(0,0,0,.4);padding:12px 14px;font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:260px;overflow:auto}
+.cmdline{margin-top:8px;font-family:var(--mono);font-size:13px;color:var(--y2);word-break:break-all}
+.risk{border:1px solid rgba(217,70,239,.5);padding:12px 14px;font-size:13px;line-height:1.65;margin-top:16px}
+.risk b{font-weight:900}
+.fineprint{font-size:12.5px;color:var(--mut);margin-top:12px;line-height:1.6}
+.modebtn{flex:1;font-size:14px;font-weight:800;padding:10px 6px;cursor:pointer;border:1px solid rgba(217,70,239,.6)}
+.inv-link{background:rgba(255,255,255,.06);border:1px solid var(--line);padding:12px 14px;color:#fff;font-family:var(--mono);font-size:13px;word-break:break-all;margin-bottom:12px}
+.inv-stat{display:flex;justify-content:space-between;align-items:center;padding:13px 2px;border-top:1px solid var(--line2)}
+.inv-stat:first-child{border-top:none}
+.inv-stat .l{font-size:14px}
+.inv-stat .v{font-family:var(--mono);font-weight:700;font-size:16px}
+.chip{display:inline-block;border:1px solid rgba(217,70,239,.55);color:var(--y2);font-size:12px;font-weight:700;padding:3px 9px;margin-top:10px}
+.inv-item{border-top:1px solid var(--line2);padding:18px 0}
+.inv-item:first-child{border-top:none}
+.inv-item .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut)}
+.inv-item h3{margin:8px 0;font-size:24px;font-weight:900}
+.inv-item p{margin:0;font-size:14.5px;line-height:1.7;color:var(--mut)}
+.spec{display:flex;align-items:baseline;gap:12px;padding:13px 0;border-bottom:1px solid var(--line2)}
+.spec:first-child{border-top:2px solid var(--line)}
+.spec .sid{font-family:var(--mono);font-size:11px;color:var(--mut2);flex:none;width:36px}
+.spec .sn{font-size:15.5px;font-weight:500;white-space:nowrap}
+.spec .dots{flex:1;border-bottom:2px dotted rgba(148,163,184,.35);transform:translateY(-4px)}
+.spec .sv{font-weight:900;font-size:15.5px;text-align:right}
+.spec .sv .mono{font-weight:700}
+.flowbar{display:flex;min-height:64px;border:1px solid rgba(217,70,239,.6)}
+.flowbar .a{flex:1;background:var(--grad);color:#fff;padding:10px 14px}
+.flowbar .b{flex:1;background:var(--panel);color:var(--y2);padding:10px 14px}
+.flowbar .pct{font-family:var(--mono);font-size:19px;font-weight:700}
+.flowbar .cap{font-size:12.5px;margin-top:2px;opacity:.9}
+.sidebox{border-top:1px solid var(--line2);padding:18px 2px 6px;margin-top:22px}
+.sidebox .fk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--mut2)}
+.sidebox h3{margin:8px 0 10px;font-size:20px;font-weight:900}
+.sidebox ul{list-style:none;margin:0;padding:0}
+.sidebox li{position:relative;padding:6px 0 6px 20px;font-size:14px;line-height:1.65;color:rgba(238,242,255,.85)}
+.sidebox li::before{content:"▶";position:absolute;left:0;top:9px;font-size:9px;color:var(--y2)}
+.chart{background:var(--panel);margin-top:0;padding:8px;position:relative}
+.chart svg{display:block;width:100%;height:auto}
+.chart-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-panel svg{display:block;width:100%;height:auto}
+.tier-sub{margin:22px 0 4px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--y2)}
+.trow{display:grid;grid-template-columns:64px 1fr auto auto auto;gap:14px;align-items:center;padding:13px 12px;border-bottom:1px solid var(--line2);font-size:15px}
+.trow .tid{font-family:var(--mono);font-weight:700}
+.trow .rng{font-family:var(--mono)}
+.trow .pr{font-family:var(--mono);font-weight:600}
+.trow .rw{font-family:var(--mono);font-weight:600}
+.trow.cur{background:var(--grad);color:#fff;font-weight:700}
+.trow.cur .now{font-size:13px;font-weight:900}
+.trow.th{font-size:12px;color:var(--mut);border-bottom:2px solid rgba(217,70,239,.5);padding:10px 12px}
+.faq details{border-bottom:1px solid var(--line2)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 4px;cursor:pointer;font-size:16.5px;font-weight:900;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .gt{color:var(--y2);font-family:var(--mono);margin-right:10px}
+.faq summary .pm{color:var(--y2);font-family:var(--mono);font-size:18px;flex:none}
+.faq .ans{padding:0 4px 18px 34px;font-size:14px;line-height:1.8;color:var(--mut);max-width:820px}
+.faq .ans .cur{display:inline-block;width:9px;height:15px;background:var(--y2);vertical-align:-2px;margin-left:6px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ticker{margin-top:22px;background:var(--panel);position:relative;overflow:hidden;border:1px solid var(--line2)}
+.ticker::before,.ticker::after{content:"";display:block;height:10px;background:repeating-linear-gradient(-45deg,#d946ef 0 16px,#0a0f22 16px 32px)}
+.tk-track{display:flex;width:max-content;animation:tk 30s linear infinite;padding:9px 0}
+.tk-track span{font-family:var(--mono);font-size:13px;white-space:nowrap;padding-right:14px}
+.tk-track b{color:var(--y2);font-weight:700}
+.tk-track .dm{color:var(--y2);padding-right:14px}
+@keyframes tk{to{transform:translateX(-50%)}}
+.swap-panel{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(217,70,239,.5)}
+.swap-panel .sw{padding:20px}
+.swap-panel .sw+.sw{border-left:1px solid var(--line2)}
+.swap-panel .sw .l{font-size:13px;color:var(--mut)}
+.swap-panel .sw .big{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px}
+.swap-panel .sw .bal{font-size:12.5px;color:var(--mut);margin-top:6px}
+/* swap estimator (MENUKAR): display only, no web3 */
+.swap-box{border:1px solid rgba(217,70,239,.5);padding:18px 20px}
+.swap-input-row{display:flex;align-items:center;gap:12px}
+.swap-input{flex:1;min-width:0}
+.swap-token{font-family:var(--mono);font-weight:700;font-size:15px;white-space:nowrap;color:#fff}
+.tok-bnb{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#f0b90b;color:#111;font-size:13px;font-weight:900;margin-right:6px;vertical-align:-5px}
+.swap-chips{display:flex;gap:8px;flex-wrap:wrap}
+.swap-chips .chip{cursor:pointer;background:transparent}
+.swap-chips .chip:hover{background:rgba(217,70,239,.18)}
+.swap-chips .chip.on{background:var(--grad);color:#fff;border-color:transparent}
+.swap-arrow{text-align:center;font-size:22px;color:var(--y2);line-height:1.2;padding:8px 0 4px}
+.swap-get{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px;word-break:break-all}
+.swap-get small{font-size:14px;color:var(--mut);white-space:nowrap}
+.swap-rates{border-top:1px dashed var(--line);margin-top:16px;padding-top:12px;display:grid;gap:8px}
+.swap-rates .rr{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;align-items:baseline;flex-wrap:wrap}
+.swap-rates .rr>span:first-child{white-space:nowrap}
+.swap-rates .rr .mono{font-family:var(--mono)}
+.swap-note{font-size:12.5px;color:var(--mut);margin-top:12px;line-height:1.6}
+.addr-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(217,70,239,.4)}
+.addr-grid>div{padding:13px 16px;border-bottom:1px solid rgba(217,70,239,.4)}
+.addr-grid>div:nth-child(odd){border-right:1px solid rgba(217,70,239,.4)}
+.addr-grid>div:nth-last-child(-n+2){border-bottom:none}
+.addr-grid .l{font-size:12px;color:var(--mut)}
+.addr-grid .v{font-family:var(--mono);color:var(--y2);font-size:14px;margin-top:5px;font-weight:600}
+.addr-grid .v a{color:var(--y2);text-decoration:none}
+footer{margin-top:70px}
+.foot-big{font-size:clamp(64px,13vw,190px);font-weight:900;line-height:1;text-align:center;color:transparent;-webkit-text-stroke:2px rgba(217,70,239,.5);letter-spacing:.01em;padding:30px 10px 6px;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.foot-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;border-top:1px solid var(--line2);padding:30px 0 8px;margin-top:20px}
+.foot-brand{display:flex;gap:14px}
+.foot-brand .logo-mark{width:44px;height:44px}
+.foot-brand h3{margin:0;color:var(--y2);font-size:20px;font-weight:900}
+.foot-brand p{color:var(--mut);font-size:13px;margin:8px 0 12px}
+.x-link{display:inline-flex;align-items:center;gap:8px;color:var(--y2);text-decoration:none;font-family:var(--mono);font-size:14px;font-weight:700}
+.x-link:hover{text-decoration:underline}
+.x-link svg{width:16px;height:16px;fill:currentColor}
+.foot-risk{color:var(--mut2);font-size:12.5px;padding:18px 0 30px}
+.modal{position:fixed;inset:0;background:rgba(5,7,15,.75);display:none;place-items:center;z-index:100;padding:18px}
+.modal.open{display:grid}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--panel);color:var(--y2);font-weight:700;font-size:14px;padding:13px 20px;z-index:120;transition:transform .3s;max-width:92vw;text-align:center;border:1px solid rgba(217,70,239,.6)}
+.toast.show{transform:translate(-50%,0)}
+#scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:59;display:none}
+@media (max-width:1100px){.stat-grid{grid-template-columns:1fr 1fr}.chart-panels{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .sidebar{transform:translateX(-102%);width:270px}
+  body.nav-open .sidebar{transform:none}
+  body.nav-open #scrim{display:block}
+  body.folded .sidebar{width:270px}
+  body.folded main{margin-left:0}
+  body.folded .sidebar .bt,body.folded .sidebar .nav a span.tx,body.folded .sidebar .nav-grp,body.folded .sidebar .side-foot{display:block}
+  main{margin-left:0;padding:0 16px 40px}
+  header.top{margin:0 -16px;padding:0 16px}
+  .burger{display:block}
+  .bnb-pill{display:none}
+  .grid2,.grid2x{grid-template-columns:1fr}
+  .stat3{grid-template-columns:1fr 1fr}
+  .stat3>div:nth-child(3){grid-column:1/-1;border-top:1px solid var(--line2)}
+  .qty-num{font-size:56px}
+  .trow{grid-template-columns:42px 1fr auto auto;font-size:13px;gap:8px;padding:12px 6px}
+  .trow .now{display:none}
+  .flowbar{flex-direction:column}
+  .swap-panel{grid-template-columns:1fr}
+  .swap-panel .sw+.sw{border-left:none;border-top:1px solid var(--line2)}
+  .foot-grid{grid-template-columns:1fr}
+  .spec{flex-wrap:wrap;gap:2px 12px}
+  .spec .dots{display:none}
+  .spec .sv{flex-basis:100%;text-align:left;font-size:14.5px}
+  .spec .sn{font-size:14.5px;white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){.tk-track,.faq .ans .cur{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="logo-mark" role="img" aria-label="YAGENT"></span>
+      <span class="bt"><b>YAGENT</b><small>YAGENT · BSC</small></span>
+      <button class="fold" id="foldBtn" type="button" title="折叠侧栏" aria-label="折叠侧栏">‹</button>
+    </div>
+    <nav class="nav" id="sideNav">
+      <a href="#dash" data-page="dash" class="on"><span class="ic">⌂</span><span class="tx">DASBOR</span></a>
+      <a href="#analytics" data-page="analytics"><span class="ic">◈</span><span class="tx">ANALISIS</span></a>
+      <a href="#invite" data-page="invite"><span class="ic">⬡</span><span class="tx">MASYARAKAT</span></a>
+      <div class="nav-grp">MINT</div>
+      <a href="#mint-free" data-page="mint-free"><span class="ic">✦</span><span class="tx">MINT GRATIS</span></a>
+      <a href="#mint-pool" data-page="mint-pool"><span class="ic">⬢</span><span class="tx">MINT POOL</span></a>
+      <div class="nav-grp">PERALATAN</div>
+      <a href="#swap" data-page="swap"><span class="ic">⇄</span><span class="tx">MENUKAR</span></a>
+      <div class="nav-grp">ATURAN</div>
+      <a href="#rules" data-page="rules"><span class="ic">⚙</span><span class="tx">ATURAN &amp; FAQ</span></a>
+    </nav>
+    <div class="side-foot">
+      <div class="sf-links">
+        <a href="https://agentforyou.xyz/" target="_blank" rel="noopener">文档</a>
+        <a href="https://x.com/youragentbsc" target="_blank" rel="noopener">𝕏 @youragentbsc</a>
+        <a href="https://bscscan.com/address/0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">BscScan</a>
+      </div>
+      <div class="side-addrs">
+        <div><b>代币</b> <a href="https://bscscan.com/address/0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">0x84b8…6e67</a></div>
+        <div><b>铸造合约</b> <a href="https://bscscan.com/address/0xe2467884f9485ac8a4136199bc93d93c76a5a211" target="_blank" rel="noopener">0xe246…a211</a></div>
+        <div><b>销售金库</b> <a href="https://bscscan.com/address/0x3d0a26a4930cfb540a6d030415bc91ba0a7f122b" target="_blank" rel="noopener">0x3d0a…122b</a></div>
+        <div><b>Agent ID</b> <a href="https://bscscan.com/address/0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F" target="_blank" rel="noopener">0x60B9…022F</a></div>
+      </div>
+    </div>
+  </aside>
+  <div id="scrim"></div>
+
+  <main>
+    <header class="top">
+      <button class="burger" id="burgerBtn" type="button" aria-label="菜单">☰</button>
+      <span class="bnb-pill"><i></i>BSC · 主网</span>
+      <div class="hsp"></div>
+      <a class="icobtn" href="https://x.com/youragentbsc" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <button class="langbtn" id="langBtn" type="button">EN</button>
+      <a class="cta-top cut-sm" href="#mint-free" data-page-link="mint-free">去铸造</a>
+    </header>
+
+    <!-- ============ DASBOR ============ -->
+    <section class="page on" id="page-dash">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">⌂</div>
+        <div><h1>DASBOR</h1><div class="ph-desc">实时查看 YAGENT 铸造进度。</div></div>
+      </div>
+      <div class="card hero-card cut">
+        <span class="wm" aria-hidden="true">YAGENT</span>
+        <div style="display:flex;gap:18px;align-items:center;position:relative">
+          <span class="logo-mark" role="img" aria-label="YAGENT 金币"></span>
+          <div class="tags" style="margin:0">
+            <span class="tag solid">AGENT ID ONLY</span>
+            <span class="tag">BNB CHAIN</span>
+            <span class="tag">FAIR MINT</span>
+          </div>
+        </div>
+        <h2 class="mega"><span>Y</span><span class="l2">AGENT</span></h2>
+        <p class="lede">持有 Agent ID 就能铸造 $YAGENT。规则全部写在合约里：单价 0.0013 BNB 起，每档 +30%；Pool A 每份 2,000,000 枚起，每 1,000 份减半；Pool B 每份 20,000,000 枚起，每 10,000 份减半；46% 铸造后自动开池 3x；邀请好友每人让你的免费额度 +1。</p>
+        <div class="stat3">
+          <div><div class="lab">下一份</div><div class="val">0.0013 <small>BNB</small></div></div>
+          <div><div class="lab">已铸造</div><div class="val">29,700</div></div>
+          <div><div class="lab">状态</div><div class="val"><span class="dot"></span><span class="zh">铸造中 · 46% 开池</span></div></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn-grad cut-sm" href="#mint-free" data-page-link="mint-free">YAGENT · 去铸造 <span aria-hidden="true">→</span></a>
+          <a class="btn-ghost" href="#rules" data-page-link="rules">看规则</a>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="card cut">
+          <h3>铸造进度</h3>
+          <p class="cd">全网铸造与开池进度（显示）。</p>
+          <div style="margin-top:14px">
+            <div class="tot-row"><span>全网已铸造</span><span><b>29,700</b> / 110,000</span></div>
+            <div class="tot-row"><span>开池进度</span><span><b>67.1B</b> / 248.4B</span></div>
+            <div class="segbar" aria-hidden="true"></div>
+            <p class="cd" style="margin-top:12px">铸造满 46% 后自动在 PancakeSwap 开池；开池前转账锁定，开池后自由交易。</p>
+          </div>
+        </div>
+        <div class="card cut">
+          <h3>铸造方式</h3>
+          <p class="cd">两种铸造，用 Agent ID，不需要连接钱包。</p>
+          <div style="margin-top:14px">
+            <div class="tot-row"><span>Mode A · 免费铸造</span><span><b>2,000,000 / 份</b></span></div>
+            <div class="tot-row"><span>Mode B · 资金池铸造</span><span><b>20,000,000 / 份</b></span></div>
+            <div class="tot-row"><span>每天免费额度</span><span><b>1 份</b></span></div>
+            <div class="tot-row"><span>单笔上限</span><span><b>10 份</b></span></div>
+          </div>
+          <div class="cta-row" style="margin-top:18px">
+            <a class="btn-grad cut-sm" href="#mint-free" data-page-link="mint-free">免费铸造</a>
+            <a class="btn-ghost" href="#mint-pool" data-page-link="mint-pool">资金池铸造</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker cut-sm"><div class="tk-track" id="tkTrack"></div></div>
+    </section>
+
+    <!-- ============ ANALISIS ============ -->
+    <section class="page" id="page-analytics">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">◈</div>
+        <div><h1>ANALISIS</h1><div class="ph-desc">价格阶梯与供应数据。</div></div>
+      </div>
+      <div class="stat-grid">
+        <div class="card stat cut"><div class="l">单价</div><div class="v">0.0013 <small>BNB 起</small></div></div>
+        <div class="card stat cut"><div class="l">总量上限</div><div class="v">5400 <small>亿</small></div></div>
+        <div class="card stat cut"><div class="l">铸造份数上限</div><div class="v">110,000 <small>份</small></div></div>
+        <div class="card stat cut"><div class="l">开池</div><div class="v"><span class="zh">46% 自动</span></div></div>
+      </div>
+      <div class="card cut" style="margin-top:16px">
+        <h3>价格阶梯</h3>
+        <p class="cd">每档 +30%，从 0.0013 BNB 到 0.0138 BNB；每个池 10 档，共 110,000 份。</p>
+        <div class="chart-panels" style="margin-top:18px" id="tierChart"></div>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card cut">
+          <div class="tier-sub">POOL A · 每档 1,000 份 · 每份奖励减半</div>
+          <div id="tierListA"></div>
+        </div>
+        <div class="card cut">
+          <div class="tier-sub">POOL B · 每档 10,000 份 · 每份奖励减半</div>
+          <div id="tierListB"></div>
+        </div>
+      </div>
+      <div class="card cut" style="margin-top:16px">
+        <h3>铸造方式</h3>
+        <p class="cd">Mode A：每天免费 1 份 · Mode B：付费 10 天线性释放 · 邀请好友每人让你的免费额度 +1。</p>
+        <div class="cta-row" style="margin-top:18px">
+          <a class="btn-grad cut-sm" href="#mint-free" data-page-link="mint-free">去铸造</a>
+          <a class="btn-ghost" href="#rules" data-page-link="rules">看规则</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MINT GRATIS ============ -->
+    <section class="page" id="page-mint-free">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">✦</div>
+        <div><h1>MINT GRATIS</h1><div class="ph-desc">每天免费铸造 1 份 —— 用 Agent ID 铸造 $YAGENT。</div></div>
+      </div>
+      <div class="grid2x">
+        <div class="card cut">
+          <div class="badges"><span class="bdg"><i></i>已验证 · BSC 主网</span><span class="bdg dim">合约已开源验证</span></div>
+          <div class="bigprice" style="margin-top:18px">0.0013 <small>BNB / 份 · <span id="epochBadge">第 1 档</span></small></div>
+          <div class="mini3">
+            <div><div class="l">每份奖励</div><div class="v" id="perShareVal">2,000,000</div></div>
+            <div><div class="l">转账</div><div class="v" id="lockVal">锁定 · 46% 后</div></div>
+            <div><div class="l">每天免费额度</div><div class="v">1 份</div></div>
+          </div>
+          <div class="pl-lab">开池进度</div>
+          <div class="tot-row"><span>全网已铸造</span><span><b>29,700</b> / 110,000</span></div>
+          <div class="tot-row"><span>开池进度</span><span><b>67.1B</b> / 248.4B</span></div>
+          <div class="segbar" aria-hidden="true"></div>
+          <p class="cd" id="mintNote" style="margin-top:14px">每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。</p>
+        </div>
+        <div class="card cut">
+          <h3 id="mintTitle">铸造 $YAGENT</h3>
+          <p class="cd" style="margin-top:4px">铸造不收 2% 税；转账与卖出才扣 2%，其中 1% 自动做市、1% 进销售金库。</p>
+          <div style="display:flex;gap:10px;margin-top:16px">
+            <button class="modebtn cut-sm" id="modeBtnA" type="button">免费铸造 · A</button>
+            <button class="modebtn cut-sm" id="modeBtnB" type="button">资金池铸造 · B</button>
+          </div>
+          <div class="qty-zone">
+            <div class="stackbars" id="stackBars"></div>
+            <div>
+              <div style="font-size:12px;color:var(--mut)">铸造份数</div>
+              <div class="qty-num"><span id="qtyNum">1</span><small> 份</small></div>
+              <div class="qty-btns">
+                <button class="qbtn cut-sm" id="qMinus" type="button">−</button>
+                <button class="qbtn cut-sm" id="qPlus" type="button">+</button>
+                <button class="qbtn cut-sm" id="qAll" type="button" style="width:auto;padding:0 12px;font-size:12px">最大</button>
+              </div>
+            </div>
+          </div>
+          <div class="payrows">
+            <div class="payrow"><span>支付 BNB</span><b id="payAmt">0.0013</b></div>
+            <div class="payrow"><span>可获得</span><b id="getAmt">2,000,000 $YAGENT</b></div>
+            <div class="payrow" id="vestTotalRow" style="display:none"><span>释放周期</span><b id="vestTotal">10 天线性释放</b></div>
+          </div>
+          <label for="agentIdInput" style="display:block;margin-top:18px;font-size:13px;color:var(--mut)">你的 Agent ID</label>
+          <input id="agentIdInput" class="agent-input" type="text" placeholder="输入你的 Agent ID（例如 0xv.ai）" autocomplete="off" />
+          <div class="refstatus" id="idStatus"></div>
+          <label for="refInput" style="display:block;margin-top:10px;font-size:13px;color:var(--mut)">推荐人（选填）</label>
+          <input id="refInput" class="agent-input" type="text" placeholder="推荐人的 Agent ID 或钱包地址（可选）" autocomplete="off" />
+          <div class="refstatus" id="refStatus"></div>
+          <div style="margin-top:16px">
+            <button class="yagent cut-sm" id="mintBtn" type="button">获取铸造指令</button>
+          </div>
+          <div class="promptbox" id="promptBox" aria-live="polite"></div>
+          <div class="cmdline" id="cmdLine"></div>
+          <div style="margin-top:10px">
+            <button class="yagent cut-sm" id="copyBtn" type="button">复制铸造指令</button>
+          </div>
+          <div class="risk">
+            <b>安全提示：</b>粘贴指令时，提示词只会让 Agent 查询铸造额度与价格、展示预览，并等待你确认后再执行。你不需要提供助记词或私钥；如需查看额度，先输入你的 Agent ID。
+          </div>
+          <div class="fineprint">每笔转账（含铸造）价格 +0.000013 BNB；不影响转账 2% 税。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MINT POOL ============ -->
+    <section class="page" id="page-mint-pool">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">⬢</div>
+        <div><h1>MINT POOL</h1><div class="ph-desc">资金池铸造 —— 奖励 10 天线性释放。</div></div>
+      </div>
+      <div class="card cut">
+        <h3>资金池铸造 · Mode B</h3>
+        <p class="cd">付费铸造，奖励更多，10 天线性释放。</p>
+        <div style="margin-top:16px">
+          <div class="tot-row"><span>每份单价</span><span><b>0.0013 BNB 起</b>，每档 +30%</span></div>
+          <div class="tot-row"><span>每份奖励</span><span><b>20,000,000</b> 起，每 10,000 份减半</span></div>
+          <div class="tot-row"><span>每天最多</span><span><b>10 份</b></span></div>
+          <div class="tot-row"><span>奖励释放</span><span><b>10 天线性释放</b></span></div>
+          <div class="tot-row"><span>开池</span><span><b>46% 后自动</b>，价格约首档 3 倍</span></div>
+        </div>
+        <div class="flowbar cut-sm" style="margin-top:18px">
+          <div class="a"><div class="pct">Mode A</div><div class="cap">免费铸造 · 每份 2,000,000 枚</div></div>
+          <div class="b"><div class="pct">Mode B</div><div class="cap">资金池铸造 · 46% 后自动开池，奖励 10 天线性释放</div></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn-grad cut-sm" href="#mint-free" data-page-link="mint-free" data-set-mode="B">去铸造 Mode B</a>
+          <a class="btn-ghost" href="#analytics" data-page-link="analytics">看价格阶梯</a>
+        </div>
+      </div>
+      <div class="card cut" style="margin-top:16px">
+        <h3>我的铸造</h3>
+        <p class="cd">只用 Agent ID 就能铸造。不需要连接钱包。</p>
+        <p class="cd" style="margin-top:10px">Mode A：每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。每次铸造都是真实的链上数据。</p>
+        <p class="cd" style="margin-top:10px">Mode B：付费铸造。每份 20,000,000 枚起，每 10,000 份减半。开池后交易价格约首档的 3 倍（假设开池 1:1）。每份奖励 10 天线性释放。</p>
+        <div id="mineBox" style="margin-top:18px"></div>
+      </div>
+    </section>
+
+    <!-- ============ MASYARAKAT / INVITE ============ -->
+    <section class="page" id="page-invite">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">⬡</div>
+        <div><h1>MASYARAKAT</h1><div class="ph-desc">邀请好友，额度 +1。</div></div>
+      </div>
+      <div class="grid2x">
+        <div class="card cut">
+          <h3>邀请好友，额度 +1</h3>
+          <p class="cd">每天 1 份免费铸造。邀请好友注册 Agent ID（仅限 SPACE ID 注册的 Agent ID 钱包）：每位好友让你每天的免费额度 +1。</p>
+          <div style="margin-top:16px">
+            <label for="invAddrInput" style="font-size:13px;color:var(--mut)">你的钱包地址</label>
+            <input id="invAddrInput" class="agent-input" type="text" placeholder="输入你的钱包地址（0x…）" autocomplete="off" />
+            <div class="refstatus" id="invAddrStatus"></div>
+            <div class="inv-link" id="invLinkBox" style="margin-top:12px">
+              <span id="invLink">https://agentforyou.xyz/?ref=</span>
+            </div>
+            <button class="yagent cut-sm" id="invCopyBtn" type="button">复制邀请链接</button>
+          </div>
+          <div style="margin-top:18px">
+            <div class="inv-stat"><span class="l">邀请上限</span><span class="v" id="invLevels">+1 免费额度</span></div>
+            <div class="inv-stat"><span class="l">邀请好友数</span><span class="v" id="invFriends">0</span></div>
+            <div class="inv-stat"><span class="l">我的免费额度</span><span class="v" id="invQuota">1 / 天</span></div>
+          </div>
+          <div class="chip">+1 免费额度</div>
+          <table id="invLevelsTable" style="display:none"></table>
+        </div>
+        <div class="card cut">
+          <div class="inv-item">
+            <div class="k">邀请</div>
+            <h3>邀请好友</h3>
+            <p>每个 Agent ID 每天 1 份免费铸造。邀请好友注册 Agent ID：每位好友让你每天的免费额度 +1。</p>
+          </div>
+          <div class="inv-item">
+            <div class="k">邀请</div>
+            <h3>邀请机制</h3>
+            <p>每位好友最多给 +1 免费额度；需要 2% 税；每位好友需要注册一个 Agent ID。</p>
+          </div>
+          <div class="inv-item">
+            <div class="k">邀请</div>
+            <h3>邀请数据</h3>
+            <p>邀请数据来自链上 Agent ID 注册表：每位好友需要一个 Agent ID 钱包。暂无邀请榜 — 邀请榜由链上数据生成。</p>
+          </div>
+          <div class="sidebox">
+            <div class="fk">MY MINTS</div>
+            <h3>我的铸造</h3>
+            <p class="cd">只用 Agent ID 就能铸造。不需要连接钱包。</p>
+            <p class="cd" style="margin-top:10px">Mode A：每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。每次铸造都是真实的链上数据。</p>
+            <p class="cd" style="margin-top:10px">Mode B：付费铸造。每份 20,000,000 枚起，每 10,000 份减半。开池后交易价格约首档的 3 倍（假设开池 1:1）。每份奖励 10 天线性释放。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENUKAR / SWAP ============ -->
+    <section class="page" id="page-swap">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">⇄</div>
+        <div><h1>MENUKAR</h1><div class="ph-desc">在 PancakeSwap 交易 $YAGENT。</div></div>
+      </div>
+      <div class="card cut">
+        <h3>兑换 $YAGENT</h3>
+        <p class="cd">本页面不需要连接钱包；交易在 PancakeSwap 完成。开池前转账锁定，开池后自由交易。</p>
+        <div class="swap-box cut-sm" style="margin-top:18px">
+          <div class="sw-field">
+            <div class="l">你支付</div>
+            <div class="swap-input-row">
+              <input id="swapBnbInput" class="agent-input swap-input" type="text" inputmode="decimal" value="0.0013" placeholder="输入 BNB 数量" autocomplete="off" spellcheck="false" />
+              <span class="swap-token"><span class="tok-bnb">B</span>BNB</span>
+            </div>
+            <div class="swap-chips">
+              <button type="button" class="chip swap-chip on" data-swap-amt="0.0013">0.0013</button>
+              <button type="button" class="chip swap-chip" data-swap-amt="0.01">0.01</button>
+              <button type="button" class="chip swap-chip" data-swap-amt="0.1">0.1</button>
+              <button type="button" class="chip swap-chip" data-swap-amt="1">1</button>
+            </div>
+            <div class="bal" id="swapTierNote">当前第 1 档 · 每档 +30%</div>
+          </div>
+          <div class="swap-arrow" aria-hidden="true">↓</div>
+          <div class="sw-field">
+            <div class="l">你收到 <span class="bdg">估算</span></div>
+            <div class="swap-get"><span id="swapGetAmt">≈ 7,000,000</span> <small>YAGENT</small></div>
+            <div class="bal" id="swapGetNote">按展示汇率估算 · 非市场价</div>
+          </div>
+          <div class="swap-rates">
+            <div class="rr"><span>汇率</span><span class="mono" id="swapRateBnb">1 BNB ≈ 5,384,615,385 YAGENT</span></div>
+            <div class="rr"><span>1 YAGENT ≈</span><span class="mono" id="swapRateYag">0.000000000186 BNB</span></div>
+          </div>
+        </div>
+        <p class="swap-note">估算基于展示汇率 — 不是市场价。直接兑换在 PancakeSwap 于铸造满 46% 开池后开放；开池前转账锁定。</p>
+        <div class="cta-row">
+          <a class="btn-grad cut-sm" href="https://pancakeswap.finance/swap?outputCurrency=0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">在 PancakeSwap 交易</a>
+          <a class="btn-ghost" href="#analytics" data-page-link="analytics">看价格阶梯</a>
+        </div>
+        <div class="addr-grid cut-sm" style="margin-top:22px">
+          <div><div class="l">代币地址</div><div class="v"><a href="https://bscscan.com/address/0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">0x84b8…6e67</a></div></div>
+          <div><div class="l">铸造合约</div><div class="v"><a href="https://bscscan.com/address/0xe2467884f9485ac8a4136199bc93d93c76a5a211" target="_blank" rel="noopener">0xe246…a211</a></div></div>
+          <div><div class="l">销售金库</div><div class="v"><a href="https://bscscan.com/address/0x3d0a26a4930cfb540a6d030415bc91ba0a7f122b" target="_blank" rel="noopener">0x3d0a…122b</a></div></div>
+          <div><div class="l">Agent ID 注册表</div><div class="v"><a href="https://bscscan.com/address/0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F" target="_blank" rel="noopener">0x60B9…022F</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATURAN & FAQ ============ -->
+    <section class="page" id="page-rules">
+      <div class="page-head">
+        <div class="ph-ic cut-sm">⚙</div>
+        <div><h1>ATURAN &amp; FAQ</h1><div class="ph-desc">全部写在合约里。</div></div>
+      </div>
+      <div class="card cut">
+        <h3>规则 · 全部写在合约里</h3>
+        <p class="cd">YAGENT 的规则全部写在链上合约里，任何人都能查证：代币 0x84b8…6e67，销售金库 0x3d0a…122b，铸造合约 0xe246…a211。链上数据无法篡改。</p>
+        <div style="margin-top:14px" id="specList"></div>
+        <div class="flowbar cut-sm" style="margin-top:20px">
+          <div class="a"><div class="pct">Mode A</div><div class="cap">免费铸造 · 每份 2,000,000 枚</div></div>
+          <div class="b"><div class="pct">Mode B</div><div class="cap">资金池铸造 · 46% 后自动开池，奖励 10 天线性释放</div></div>
+        </div>
+        <div class="grid2" style="margin-top:6px">
+          <div class="sidebox">
+            <div class="fk">SELF-CUSTODY</div>
+            <h3>自我保管</h3>
+            <ul>
+              <li>代币由 Agent ID 钱包持有，私钥在你的钱包里。</li>
+              <li>不需要连接钱包；合约不托管你的资产。</li>
+            </ul>
+          </div>
+          <div class="sidebox">
+            <div class="fk">DETERMINISTIC</div>
+            <h3>规则确定</h3>
+            <ul>
+              <li>单价、减半、税率、开池条件全部写在合约里。</li>
+              <li>开池时 LP 代币直接销毁，流动性永久锁定。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card cut faq" style="margin-top:16px">
+        <h3>常见问题</h3>
+        <div id="faqList" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-big" aria-hidden="true">YAGENT</div>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <span class="logo-mark" role="img" aria-label="YAGENT"></span>
+          <div>
+            <h3>YAGENT</h3>
+            <p>持有 Agent ID 就能铸造 $YAGENT。本页面不需要连接钱包。</p>
+            <a class="x-link" href="https://x.com/youragentbsc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@youragentbsc</a>
+          </div>
+        </div>
+        <div class="addr-grid cut-sm">
+          <div><div class="l">代币地址</div><div class="v"><a href="https://bscscan.com/address/0x84b8eaf7e09270624e8562b7f0be2835642d6e67" target="_blank" rel="noopener">0x84b8…6e67</a></div></div>
+          <div><div class="l">铸造合约</div><div class="v"><a href="https://bscscan.com/address/0xe2467884f9485ac8a4136199bc93d93c76a5a211" target="_blank" rel="noopener">0xe246…a211</a></div></div>
+          <div><div class="l">销售金库</div><div class="v"><a href="https://bscscan.com/address/0x3d0a26a4930cfb540a6d030415bc91ba0a7f122b" target="_blank" rel="noopener">0x3d0a…122b</a></div></div>
+          <div><div class="l">Agent ID 注册表</div><div class="v"><a href="https://bscscan.com/address/0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F" target="_blank" rel="noopener">0x60B9…022F</a></div></div>
+        </div>
+      </div>
+      <div class="foot-risk">风险提示：YAGENT 处于链上实验阶段，加密货币价格波动剧烈，请勿投入超过承受能力的资金。铸造前请先确认合约地址（代币 0x84b8…6e67）。本文不构成投资建议。</div>
+    </footer>
+  </main>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="card cut" style="max-width:460px;width:100%">
+    <h3 style="margin-top:0">提示</h3>
+    <p class="cd" id="modalText">本页面不需要连接钱包。</p>
+    <div class="cta-row"><button class="btn-grad cut-sm" id="modalClose" type="button">确定</button></div>
+  </div>
+</div>
+<div class="toast cut-sm" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+/* favicon from the CSS --logo var (tone's gold coin) */
+try{
+  var cs=getComputedStyle(document.documentElement).getPropertyValue("--logo").trim();
+  var m=cs.match(/url\(["']?(.*?)["']?\)/);
+  if(m&&m[1]){var lk=document.createElement("link");lk.rel="icon";lk.type="image/jpeg";lk.href=m[1];document.head.appendChild(lk);}
+}catch(e){}
+
+/* ---------- page switching ---------- */
+var PAGES=["dash","analytics","mint-free","mint-pool","invite","swap","rules"];
+function showPage(id){
+  if(PAGES.indexOf(id)<0) id="dash";
+  PAGES.forEach(function(p){
+    var sec=document.getElementById("page-"+p);
+    if(sec) sec.classList.toggle("on",p===id);
+  });
+  document.querySelectorAll("#sideNav a[data-page]").forEach(function(a){
+    a.classList.toggle("on",a.getAttribute("data-page")===id);
+  });
+  document.body.classList.remove("nav-open");
+  var cur=location.hash.replace("#","");
+  if(cur!==id){history.replaceState(null,"","#"+id);}
+}
+window.__showPage=showPage;
+document.querySelectorAll("#sideNav a[data-page]").forEach(function(a){
+  a.addEventListener("click",function(ev){ev.preventDefault();showPage(a.getAttribute("data-page"));});
+});
+document.querySelectorAll("[data-page-link]").forEach(function(a){
+  a.addEventListener("click",function(ev){
+    ev.preventDefault();
+    showPage(a.getAttribute("data-page-link"));
+    var sm=a.getAttribute("data-set-mode");
+    if(sm){var mb=document.getElementById(sm==="B"?"modeBtnB":"modeBtnA");if(mb)mb.click();}
+  });
+});
+window.addEventListener("hashchange",function(){showPage(location.hash.replace("#","")||"dash");});
+var burger=document.getElementById("burgerBtn");
+if(burger) burger.addEventListener("click",function(){document.body.classList.toggle("nav-open");});
+var scrim=document.getElementById("scrim");
+if(scrim) scrim.addEventListener("click",function(){document.body.classList.remove("nav-open");});
+var fold=document.getElementById("foldBtn");
+if(fold) fold.addEventListener("click",function(){document.body.classList.toggle("folded");});
+var mc=document.getElementById("modalClose");
+if(mc) mc.addEventListener("click",function(){document.getElementById("modal").classList.remove("open");});
+var modal=document.getElementById("modal");
+if(modal) modal.addEventListener("click",function(ev){if(ev.target===modal) modal.classList.remove("open");});
+
+/* ---------- toast ---------- */
+var toastEl=document.getElementById("toast"),toastTimer=null;
+function showToast(msg){
+  toastEl.textContent=msg;toastEl.classList.add("show");
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){toastEl.classList.remove("show");},2600);
+}
+
+/* ---------- constants (mainnet, display-only 27%) ---------- */
+var MINTED=0; /* on-chain minted is still 0; display numbers are static */
+var TOTAL=110000,OPEN_AT=0.46,POOL_TOKENS=248400000000;
+var TOKEN="0x84b8eaf7e09270624e8562b7f0be2835642d6e67";
+var MINTER="0xe2467884f9485ac8a4136199bc93d93c76a5a211";
+var VAULT="0x3d0a26a4930cfb540a6d030415bc91ba0a7f122b";
+var REGISTRY="0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
+var START_PRICE=0.0013;
+
+/* ---------- ticker ---------- */
+(function(){
+  var el=document.getElementById("tkTrack");if(!el)return;
+  var items=[
+    ["YAGENT","0.0013 BNB 起"],["AGENT ID ONLY","铸造"],["46%","自动开池"],
+    ["2% 税","1% 自动做市 + 1% 进销售金库"],["LP","开池时销毁"],
+    ["邀请","好友 +1 免费额度"],["每天","1 份免费铸造"],["总量上限","5400 亿"]
+  ];
+  var html="";
+  for(var r=0;r<2;r++){
+    items.forEach(function(it){html+="<span><b>"+it[0]+"</b> "+it[1]+"</span><span class=\"dm\">◆</span>";});
+  }
+  el.innerHTML=html;
+})();
+
+/* ---------- segbars (11 of 40 filled) ---------- */
+document.querySelectorAll(".segbar").forEach(function(seg){
+  var html="";
+  for(var i=0;i<40;i++) html+="<i class='"+(i<11?"f":"")+"'></i>";
+  seg.innerHTML=html;
+});
+
+/* ---------- tier data ---------- */
+function epochPrice(e){return START_PRICE*Math.pow(1.3,e-1);}
+function fmtPrice(p){
+  var s=p.toPrecision(4);
+  if(s.indexOf("e")>=0) s=p.toFixed(6);
+  return s.replace(/0+$/,"").replace(/\.$/,"");
+}
+function tierRow(pool,e,cur){
+  var start,span,base;
+  if(pool==="A"){start=(e-1)*1000+1;span=1000;base=2000000;}
+  else{start=(e-1)*10000+1;span=10000;base=20000000;}
+  var end=start+span-1;
+  var rw=Math.floor(base/Math.pow(2,e-1));
+  return {id:pool+("0"+e).slice(-2),range:start.toLocaleString("en-US")+"–"+end.toLocaleString("en-US"),
+    price:fmtPrice(epochPrice(e)),reward:rw.toLocaleString("en-US"),cur:cur};
+}
+function rowHtml(r){
+  return "<div class=\"trow"+(r.cur?" cur":"")+"\"><span class=\"tid\">"+r.id+"</span><span class=\"rng\">"+r.range+"</span><span class=\"pr\">"+r.price+"</span><span class=\"rw\">"+r.reward+"</span><span class=\"now\">"+(r.cur?"NOW":"")+"</span></div>";
+}
+function renderTiers(){
+  var a=document.getElementById("tierListA"),b=document.getElementById("tierListB");
+  var th="<div class=\"trow th\"><span>档</span><span>份数</span><span>单价 BNB</span><span>每份奖励</span><span></span></div>";
+  var ha=th,hb=th;
+  for(var e=1;e<=10;e++){ha+=rowHtml(tierRow("A",e,e===1));hb+=rowHtml(tierRow("B",e,e===1));}
+  if(a)a.innerHTML=ha; if(b)b.innerHTML=hb;
+}
+renderTiers();
+
+/* ---------- price step chart (two panels) ---------- */
+function renderChart(){
+  var wrap=document.getElementById("tierChart");if(!wrap)return;
+  function panel(pool,title){
+    var W=560,H=300,padL=44,padB=30,padT=34;
+    var maxP=epochPrice(10);
+    var bw=(W-padL-16)/10;
+    var s="";
+    s+="<svg viewBox=\"0 0 "+W+" "+H+"\" role=\"img\" aria-label=\""+title+"\">";
+    s+="<text x=\""+(padL)+"\" y=\"18\" fill=\"#e879f9\" font-size=\"13\" font-family=\"ui-monospace,monospace\" font-weight=\"700\">"+title+"</text>";
+    for(var g=0;g<=4;g++){
+      var y=padT+(H-padB-padT)*(1-g/4);
+      s+="<line x1=\""+padL+"\" y1=\""+y+"\" x2=\""+(W-8)+"\" y2=\""+y+"\" stroke=\"rgba(148,163,184,.2)\" stroke-width=\"1\"/>";
+      var pv=maxP*g/4;
+      s+="<text x=\""+(padL-6)+"\" y=\""+(y+4)+"\" fill=\"rgba(226,232,240,.5)\" font-size=\"10\" font-family=\"ui-monospace,monospace\" text-anchor=\"end\">"+pv.toFixed(4)+"</text>";
+    }
+    for(var e=1;e<=10;e++){
+      var p=epochPrice(e);
+      var bh=(H-padB-padT)*(p/maxP);
+      var x=padL+8+(e-1)*bw;
+      var y=H-padB-bh;
+      var cur=e===1;
+      s+="<rect x=\""+x.toFixed(1)+"\" y=\""+y.toFixed(1)+"\" width=\""+(bw-10).toFixed(1)+"\" height=\""+bh.toFixed(1)+"\" fill=\""+(cur?"url(#gcur)":"rgba(168,85,247,.45)")+"\" stroke=\""+(cur?"#e879f9":"rgba(168,85,247,.6)")+"\" stroke-width=\"1\"/>";
+      s+="<text x=\""+(x+(bw-10)/2).toFixed(1)+"\" y=\""+(H-10)+"\" fill=\"rgba(226,232,240,.6)\" font-size=\"10\" font-family=\"ui-monospace,monospace\" text-anchor=\"middle\">"+pool+("0"+e).slice(-2)+"</text>";
+      if(cur) s+="<text x=\""+(x+(bw-10)/2).toFixed(1)+"\" y=\""+(y-8).toFixed(1)+"\" fill=\"#f0abfc\" font-size=\"11\" font-family=\"ui-monospace,monospace\" font-weight=\"700\" text-anchor=\"middle\">NOW·"+pool+"01</text>";
+    }
+    s+="<defs><linearGradient id=\"gcur\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#e879f9\"/><stop offset=\".5\" stop-color=\"#a855f7\"/><stop offset=\"1\" stop-color=\"#3b82f6\"/></linearGradient></defs>";
+    s+="</svg>";
+    return "<div class=\"chart-panel cut-sm\" style=\"background:var(--panel);border:1px solid var(--line);padding:10px\">"+s+"</div>";
+  }
+  wrap.innerHTML=panel("A","POOL A · 每档 1,000 份")+panel("B","POOL B · 每档 10,000 份");
+}
+renderChart();
+
+/* ---------- specs ---------- */
+var SPECS=[
+  ["S-01","单价","<span class=\"mono\">0.0013 BNB</span> 起"],
+  ["S-02","价格阶梯","每档 <span class=\"mono\">+30%</span>"],
+  ["S-03","总量上限","<span class=\"mono\">5400 亿</span>"],
+  ["S-04","铸造份数上限","<span class=\"mono\">110,000</span> 份"],
+  ["S-05","开池条件","铸造满 <span class=\"mono\">46%</span> 自动开池"],
+  ["S-06","转账税","<span class=\"mono\">2%</span>（1% 自动做市 + 1% 进销售金库）"],
+  ["S-07","Mode A 释放","<span class=\"mono\">24 小时</span>后可领"],
+  ["S-08","Mode B 释放","<span class=\"mono\">10 天</span>线性释放"],
+  ["S-09","每天免费额度","<span class=\"mono\">1</span> 份"],
+  ["S-10","单笔上限","<span class=\"mono\">10</span> 份"],
+  ["S-11","邀请","好友 <span class=\"mono\">+1</span> 免费额度"],
+  ["S-12","Agent ID","<span class=\"mono\">SPACE ID</span> 注册表"]
+];
+(function(){
+  var el=document.getElementById("specList");if(!el)return;
+  var h="";
+  SPECS.forEach(function(sp){
+    h+="<div class=\"spec\"><span class=\"sid\">"+sp[0]+"</span><span class=\"sn\">"+sp[1]+"</span><span class=\"dots\"></span><span class=\"sv\">"+sp[2]+"</span></div>";
+  });
+  el.innerHTML=h;
+})();
+
+/* ---------- FAQ (8 questions, verbatim from the live page) ---------- */
+var FAQS=[
+  ["谁可以铸造？","持有 Agent ID（.ai）的钱包。每天免费额度 1 份，邀请好友每人 +1，没有上限。（主网使用 SPACE ID 真实注册表，只有持有 Agent ID 的钱包才能铸造。）",true],
+  ["代币总量多少？","总量上限 5400 亿枚：创作者 5%（270 亿）、流动性储备 20%（1080 亿）、铸造奖励 75%（4050 亿），按份发放。",false],
+  ["什么时候可以交易？","交易对将在铸造满 46% 后自动在 PancakeSwap 开池；开池前代币转账锁定（铸造与领取不受影响），开池后自由交易。",false],
+  ["邀请有什么好处？","没有 BNB 返利；好友用你的链接第一次铸造，你的免费铸造额度 +1，上不封顶。",false],
+  ["免费额度怎么增加？","每天免费额度 1 份；每邀请 1 人第一次铸造，额度 +1，上不封顶。",false],
+  ["怎么用 agent 铸造？","在上方填入你的 Binance Agent ID，选模式 A 或 B，复制指令给你的 Binance agent 执行；先给预览，你确认后才执行。不需要连接钱包。",false],
+  ["合约里项目方有哪些权限？","管理钱包只能开关铸造、暂停新铸造最多 7 天（领取与赎回不受影响），且可以转移或放弃管理权；没有增发、修改税率、冻结资产或转走用户资金的权限。",false],
+  ["项目方能撤走池子吗？","开池时 LP 凭证直接打入黑洞地址销毁，任何人都无法撤走；铸造合约里也没有撤走流动性的功能。合约参数部署后固定，规则对所有人一样。",false]
+];
+(function(){
+  var el=document.getElementById("faqList");if(!el)return;
+  var h="";
+  FAQS.forEach(function(f,i){
+    h+="<details"+(f[2]?" open":"")+"><summary><span><span class=\"gt\">Q"+(i+1)+"</span>"+f[0]+"</span><span class=\"pm\">"+(f[2]?"−":"+")+"</span></summary><div class=\"ans\">"+f[1]+(f[2]?"<span class=\"cur\"></span>":"")+"</div></details>";
+  });
+  el.innerHTML=h;
+  el.addEventListener("toggle",function(e){
+    var d=e.target;
+    if(d.tagName!=="DETAILS")return;
+    var pm=d.querySelector(".pm");
+    if(pm)pm.textContent=d.open?"−":"+";
+  },true);
+})();
+
+/* ---------- invite levels (hidden table, kept for parity) ---------- */
+(function(){
+  var t=document.getElementById("invLevelsTable");if(!t)return;
+  var h="<thead><tr><th>等级</th><th>邀请人数</th><th>奖励</th></tr></thead><tbody>";
+  for(var i=1;i<=10;i++) h+="<tr><td>"+i+"</td><td>"+i+" 人</td><td>+1 免费额度</td></tr>";
+  h+="</tbody>";
+  t.innerHTML=h;
+})();
+
+/* ---------- invite input + copy: owned by script 2 (verbatim logic) ---------- */
+
+/* ---------- mint builder state ---------- */
+var mode="A",qty=1;
+var qtyNum=document.getElementById("qtyNum");
+var qMinus=document.getElementById("qMinus"),qPlus=document.getElementById("qPlus"),qAll=document.getElementById("qAll");
+var payAmt=document.getElementById("payAmt"),getAmt=document.getElementById("getAmt");
+var vestTotalRow=document.getElementById("vestTotalRow"),vestTotal=document.getElementById("vestTotal");
+var perShareVal=document.getElementById("perShareVal"),lockVal=document.getElementById("lockVal");
+var mintNote=document.getElementById("mintNote"),mintTitle=document.getElementById("mintTitle");
+var epochBadge=document.getElementById("epochBadge");
+var stackBars=document.getElementById("stackBars");
+var modeBtnA=document.getElementById("modeBtnA"),modeBtnB=document.getElementById("modeBtnB");
+
+function tierPrice(){return START_PRICE*Math.pow(1.3,Math.max(0,Math.floor(MINTED/1000)));}
+function epochOf(){return Math.max(1,Math.floor(MINTED/1000)+1);}
+function render(){
+  var price=tierPrice();
+  var perShare=mode==="A"?2000000:20000000;
+  var total=perShare*qty;
+  payAmt.textContent=(price*qty).toFixed(4).replace(/0+$/,"").replace(/\.$/,"");
+  getAmt.textContent=total.toLocaleString("en-US")+" $YAGENT";
+  qtyNum.textContent=qty;
+  qMinus.disabled=qty<=1;
+  qPlus.disabled=qty>=10;
+  epochBadge.textContent="第 "+epochOf()+" 档";
+  perShareVal.textContent=perShare.toLocaleString("en-US");
+  lockVal.textContent=mode==="A"?"锁定 · 46% 后":"锁定 · 46% 后";
+  vestTotalRow.style.display=mode==="B"?"flex":"none";
+  if(mode==="B") vestTotal.textContent="10 天线性释放";
+  mintNote.textContent=mode==="A"
+    ?"每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。"
+    :"资金池铸造：每份 20,000,000 枚起，每 10,000 份减半，奖励 10 天线性释放。";
+  mintTitle.textContent=mode==="A"?"铸造 $YAGENT":"铸造 $YAGENT · 资金池";
+  var html="";
+  for(var i=0;i<10;i++) html+="<i class='"+(i<qty?"f":"")+"'></i>";
+  stackBars.innerHTML=html;
+  if(typeof window.__renderPrompt==="function") window.__renderPrompt();
+}
+function setMode(m){
+  mode=m;
+  var onA=m==="A";
+  modeBtnA.style.background=onA?"var(--grad)":"transparent";
+  modeBtnA.style.color=onA?"#fff":"var(--y2)";
+  modeBtnB.style.background=!onA?"var(--grad)":"transparent";
+  modeBtnB.style.color=!onA?"#fff":"var(--y2)";
+  render();
+}
+window.__setMode=setMode;
+window.__tierPrice=tierPrice; window.__epochOf=epochOf;
+modeBtnA.addEventListener("click",function(){setMode("A");});
+modeBtnB.addEventListener("click",function(){setMode("B");});
+qMinus.addEventListener("click",function(){if(qty>1){qty--;render();}});
+qPlus.addEventListener("click",function(){if(qty<10){qty++;render();}});
+qAll.addEventListener("click",function(){qty=10;render();});
+
+/* ---------- my mints ---------- */
+function renderMine(){
+  var box=document.getElementById("mineBox");if(!box)return;
+  var btns=[
+    ["查看铸造额度与持仓","checkMintStatus","查看你的 Agent ID 今天还能免费铸造几份、已铸造几份、奖励释放进度。"],
+    ["领取 Mode A 奖励","claimFree","领取 24 小时后到期的免费铸造奖励。"],
+    ["领取 Mode B 奖励","claimReward","领取 10 天线性释放的资金池铸造奖励。"]
+  ];
+  var h="";
+  btns.forEach(function(b){
+    h+="<div style=\"border-top:1px solid var(--line2);padding:16px 0\"><div style=\"font-weight:900;font-size:16px\">"+b[0]+"</div>"
+      +"<p class=\"cd\" style=\"margin:8px 0 12px\">"+b[2]+"</p>"
+      +"<button class=\"yagent cut-sm\" data-mine=\""+b[1]+"\" type=\"button\">复制指令</button></div>";
+  });
+  h+="<div style=\"border-top:1px solid var(--line2);padding:16px 0\"><button class=\"btn-ghost\" id=\"meIdBtn\" type=\"button\">输入你的 Agent ID 复制指令</button></div>";
+  box.innerHTML=h;
+  box.querySelectorAll("[data-mine]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var kind=btn.getAttribute("data-mine");
+      var txt=typeof window.__minePrompt==="function"?window.__minePrompt(kind):"";
+      if(!txt){showToast("请先输入你的 Agent ID");return;}
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){showToast("指令已复制");},function(){showToast("复制失败，请手动复制");});
+      }else{showToast("请手动复制"); }
+    });
+  });
+  var me=document.getElementById("meIdBtn");
+  if(me) me.addEventListener("click",function(){
+    showPage("mint-free");
+    var inp=document.getElementById("agentIdInput");
+    if(inp){inp.focus();inp.scrollIntoView({behavior:"smooth",block:"center"});}
+  });
+}
+renderMine();
+
+/* ---------- lang button (replaced by script 2) ---------- */
+document.getElementById("langBtn").addEventListener("click",function(){
+  showToast("语言切换中…");
+});
+
+/* ---------- init page from hash ---------- */
+showPage(location.hash.replace("#","")||"dash");
+setMode("A");
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===== Language: 中文 / English (I18N-WALKER-v1) =====
+     Static text is translated by walking text nodes against I18N;
+     dynamic strings use t(zh, en). Choice persists in localStorage. */
+  var LANG = "zh";
+  try{ LANG = localStorage.getItem("at_lang") || "zh"; }catch(e){}
+  function t(zh, en){ return LANG === "en" ? en : zh; }
+  var I18N = {
+  "10 份": "10 shares",
+  "2,000,000 枚": "2,000,000 tokens",
+  "YAGENT · 去铸造": "YAGENT · Mint now",
+  "去铸造": "Mint now",
+  "DASBOR": "DASHBOARD",
+  "ANALISIS": "ANALYTICS",
+  "MASYARAKAT": "COMMUNITY",
+  "MINT GRATIS": "FREE MINT",
+  "MINT POOL": "POOL MINT",
+  "MENUKAR": "SWAP",
+  "ATURAN & FAQ": "RULES & FAQ",
+  "PERALATAN": "TOOLS",
+  "ATURAN": "RULES",
+  "MINT": "MINT",
+  "BSC · 主网": "BSC · Mainnet",
+  "实时查看 YAGENT 铸造进度。": "Track YAGENT mint progress in real time.",
+  "价格阶梯与供应数据。": "Price tiers and supply data.",
+  "每天免费铸造 1 份 —— 用 Agent ID 铸造 $YAGENT。": "1 free share a day — mint $YAGENT with an Agent ID.",
+  "资金池铸造 —— 奖励 10 天线性释放。": "Pool mint — rewards vest linearly over 10 days.",
+  "邀请好友，额度 +1。": "Invite friends, get +1 quota.",
+  "在 PancakeSwap 交易 $YAGENT。": "Trade $YAGENT on PancakeSwap.",
+  "全部写在合约里。": "Everything is written in the contract.",
+  "全网铸造与开池进度（显示）。": "Global mint and pool-open progress (display).",
+  "铸造满 46% 后自动在 PancakeSwap 开池；开池前转账锁定，开池后自由交易。": "The pool opens automatically on PancakeSwap at 46% minted; transfers are locked before the pool opens and free after.",
+  "两种铸造，用 Agent ID，不需要连接钱包。": "Two ways to mint, with an Agent ID. No wallet connection needed.",
+  "免费铸造": "Free mint",
+  "资金池铸造": "Pool mint",
+  "铸造方式": "How to mint",
+  "每档 +30%，从 0.0013 BNB 到 0.0138 BNB；每个池 10 档，共 110,000 份。": "Each tier +30%, from 0.0013 BNB to 0.0138 BNB; 10 tiers per pool, 110,000 shares total.",
+  "POOL A · 每档 1,000 份 · 每份奖励减半": "POOL A · 1,000 shares per tier · reward per share halves",
+  "POOL B · 每档 10,000 份 · 每份奖励减半": "POOL B · 10,000 shares per tier · reward per share halves",
+  "Mode A：每天免费 1 份 · Mode B：付费 10 天线性释放 · 邀请好友每人让你的免费额度 +1。": "Mode A: 1 free share a day · Mode B: paid, 10-day linear vesting · each invited friend gives you +1 free quota.",
+  "已验证 · BSC 主网": "Verified · BSC mainnet",
+  "合约已开源验证": "Contracts open-source verified",
+  "铸造份数": "Shares to mint",
+  "最大": "Max",
+  "支付 BNB": "Pay BNB",
+  "可获得": "You receive",
+  "释放周期": "Vesting",
+  "你的 Agent ID": "Your Agent ID",
+  "获取铸造指令": "Get mint instructions",
+  "复制铸造指令": "Copy mint instructions",
+  "安全提示：": "Safety note:",
+  "粘贴指令时，提示词只会让 Agent 查询铸造额度与价格、展示预览，并等待你确认后再执行。你不需要提供助记词或私钥；如需查看额度，先输入你的 Agent ID。": "When you paste the prompt, it only asks the Agent to check your mint quota and price, show a preview, and wait for your confirmation before executing. You never need to share a seed phrase or private key; enter your Agent ID first to check quota.",
+  "免费铸造 · A": "Free mint · A",
+  "资金池铸造 · B": "Pool mint · B",
+  "铸造不收 2% 税；转账与卖出才扣 2%，其中 1% 自动做市、1% 进销售金库。": "Minting is tax-free; the 2% tax applies only to transfers and sells — 1% auto-liquidity, 1% to the sale vault.",
+  "转账": "Transfers",
+  "开池进度": "Pool-open progress",
+  "资金池铸造 · Mode B": "Pool mint · Mode B",
+  "付费铸造，奖励更多，10 天线性释放。": "Paid mint, bigger rewards, 10-day linear vesting.",
+  "0.0013 BNB 起": "from 0.0013 BNB",
+  "每天最多": "Max per day",
+  "奖励释放": "Reward vesting",
+  "46% 后自动": "auto at 46%",
+  "价格约首档 3 倍": "~3x the first tier",
+  "我的铸造": "My mints",
+  "只用 Agent ID 就能铸造。不需要连接钱包。": "Mint with just an Agent ID. No wallet connection needed.",
+  "Mode A：每天 1 份免费铸造。需要一个 Agent ID，每份 2,000,000 枚，24 小时后可领。每次铸造都是真实的链上数据。": "Mode A: 1 free share a day. You need an Agent ID; each share is 2,000,000 tokens, claimable after 24 hours. Every mint is real on-chain data.",
+  "Mode B：付费铸造。每份 20,000,000 枚起，每 10,000 份减半。开池后交易价格约首档的 3 倍（假设开池 1:1）。每份奖励 10 天线性释放。": "Mode B: paid mint. 20,000,000 per share to start, halving every 10,000 shares. After the pool opens, the trading price is about 3x the first tier (assuming a 1:1 pool open). Each share's reward vests linearly over 10 days.",
+  "去铸造 Mode B": "Mint Mode B",
+  "看价格阶梯": "See price tiers",
+  "邀请好友，额度 +1": "Invite friends, get +1 quota",
+  "每天 1 份免费铸造。邀请好友注册 Agent ID（仅限 SPACE ID 注册的 Agent ID 钱包）：每位好友让你每天的免费额度 +1。": "1 free share a day. Invite friends to register an Agent ID (only SPACE ID-registered Agent ID wallets): each friend gives you +1 daily free quota.",
+  "你的钱包地址": "Your wallet address",
+  "邀请上限": "Invite cap",
+  "+1 免费额度": "+1 free quota",
+  "邀请好友数": "Friends invited",
+  "我的免费额度": "My free quota",
+  "邀请好友": "Invite friends",
+  "每个 Agent ID 每天 1 份免费铸造。邀请好友注册 Agent ID：每位好友让你每天的免费额度 +1。": "Each Agent ID gets 1 free share a day. Invite friends to register an Agent ID: each friend gives you +1 daily free quota.",
+  "邀请机制": "How invites work",
+  "每位好友最多给 +1 免费额度；需要 2% 税；每位好友需要注册一个 Agent ID。": "Each friend gives at most +1 free quota; a 2% tax applies; each friend needs to register an Agent ID.",
+  "邀请数据": "Invite data",
+  "邀请数据来自链上 Agent ID 注册表：每位好友需要一个 Agent ID 钱包。暂无邀请榜 — 邀请榜由链上数据生成。": "Invite data comes from the on-chain Agent ID registry: each friend needs an Agent ID wallet. No leaderboard yet — the leaderboard is generated from on-chain data.",
+  "兑换 $YAGENT": "Swap $YAGENT",
+  "本页面不需要连接钱包；交易在 PancakeSwap 完成。开池前转账锁定，开池后自由交易。": "This page never asks to connect a wallet; trades happen on PancakeSwap. Transfers are locked before the pool opens and free after.",
+  "你支付": "You pay",
+  "你收到": "You receive",
+  "当前第 1 档 · 每档 +30%": "Current tier 1 · +30% per tier",
+  "Mode B 每份奖励 · 每 10,000 份减半": "Mode B reward per share · halving every 10,000 shares",
+  "在 PancakeSwap 交易": "Trade on PancakeSwap",
+  "估算": "ESTIMATE",
+  "汇率": "Rate",
+  "估算基于展示汇率 — 不是市场价。直接兑换在 PancakeSwap 于铸造满 46% 开池后开放；开池前转账锁定。": "This estimate uses the displayed rate — not a market price. Direct swaps on PancakeSwap open once the pool opens at 46% minted; transfers are locked until then.",
+  "代币地址": "Token address",
+  "销售金库": "Sale vault",
+  "Agent ID 注册表": "Agent ID registry",
+  "规则 · 全部写在合约里": "Rules · all on-chain",
+  "YAGENT 的规则全部写在链上合约里，任何人都能查证：代币 0x84b8…6e67，销售金库 0x3d0a…122b，铸造合约 0xe246…a211。链上数据无法篡改。": "YAGENT's rules are all written in on-chain contracts, verifiable by anyone: token 0x84b8…6e67, sale vault 0x3d0a…122b, minter 0xe246…a211. On-chain data cannot be tampered with.",
+  "自我保管": "Self-custody",
+  "代币由 Agent ID 钱包持有，私钥在你的钱包里。": "Tokens are held by your Agent ID wallet; the private key stays in your wallet.",
+  "不需要连接钱包；合约不托管你的资产。": "No wallet connection needed; the contracts never custody your assets.",
+  "规则确定": "Deterministic rules",
+  "单价、减半、税率、开池条件全部写在合约里。": "Price, halving, tax and pool-open conditions are all written in the contracts.",
+  "开池时 LP 代币直接销毁，流动性永久锁定。": "At pool open, LP tokens are burned directly and liquidity is locked forever.",
+  "常见问题": "FAQ",
+  "持有 Agent ID 就能铸造 $YAGENT。本页面不需要连接钱包。": "Hold an Agent ID to mint $YAGENT. This page never asks to connect a wallet.",
+  "风险提示：YAGENT 处于链上实验阶段，加密货币价格波动剧烈，请勿投入超过承受能力的资金。铸造前请先确认合约地址（代币 0x84b8…6e67）。本文不构成投资建议。": "Risk note: YAGENT is an on-chain experiment; crypto prices are highly volatile. Never invest more than you can afford to lose. Confirm the contract address before minting (token 0x84b8…6e67). This is not investment advice.",
+  "文档": "Documentation",
+  "本页面不需要连接钱包。": "This page never asks to connect a wallet.",
+  "提示": "Notice",
+  "确定": "OK",
+  "开池条件": "Pool-open condition",
+  "转账税": "Transfer tax",
+  "Mode A 释放": "Mode A unlock",
+  "Mode B 释放": "Mode B vesting",
+  "Agent ID": "Agent ID",
+  "单价 BNB": "Price (BNB)",
+  "2% 税": "2% tax",
+  "1% 自动做市 + 1% 进销售金库": "1% auto-liquidity + 1% to the sale vault",
+  "开池时销毁": "burned at pool open",
+  "好友 +1 免费额度": "+1 free quota per friend",
+  "每天": "Daily",
+  "1 份免费铸造": "1 free share",
+  "自动开池": "auto-opens",
+  "Mode A · 免费铸造": "Mode A · Free mint",
+  "Mode B · 资金池铸造": "Mode B · Pool mint",
+  "资金池铸造 · 每天最多 10 份": "Pool mint · up to 10 shares a day",
+  "10 天线性释放": "10-day linear vesting",
+  "领取 Mode B 奖励": "Claim Mode B rewards",
+  "什么时候可以交易？": "When can I trade?",
+  "代币总量多少？": "What is the total token supply?",
+  "合约里项目方有哪些权限？": "What permissions does the project have in the contract?",
+  "项目方能撤走池子吗？": "Can the project remove the pool?",
+  "邀请有什么好处？": "What do I get for inviting?",
+  "免费额度怎么增加？": "How do I increase my free quota?",
+  "怎么用 agent 铸造？": "How do I mint with my agent?",
+  "谁可以铸造？": "Who can mint?",
+  "铸造合约": "Mint contract",
+  "每份单价": "Price per share",
+  "第 1 档每份奖励": "Reward per share (tier 1)",
+  "奖励解锁": "Reward unlock",
+  "锁定期": "Lock period",
+  "奖励": "Reward",
+  "流动性": "Liquidity",
+  "初始流动性": "Initial liquidity",
+  "已注入交易对": "Added to the trading pair",
+  "已注入": "added",
+  "每份 2,000,000": "2,000,000 per share",
+  "铸造 24 小时后领取": "Claim 24 hours after minting",
+  "免费铸造 · 24 小时后连本带奖励领取": "Free mint · claim with principal + rewards after 24h",
+  "PancakeSwap · 46% 后开池": "PancakeSwap · opens at 46%",
+  "每份价格": "Price per share",
+  "每份到手": "Tokens per share",
+  "每一笔铸造的钱": "Where each mint payment goes",
+  "流动性池": "Liquidity pool",
+  "第": "No.",
+  "看规则": "Read the rules",
+  "等级": "Level",
+  "规则": "Rules",
+  "连接": "Connect",
+  "粘贴你的钱包地址，生成专属链接。": "Paste your wallet address to generate your personal link.",
+  "邀请数请用「查询额度与仓位」指令问你的 agent。": "Ask your agent for your invite count with the 'Check quota & positions' prompt.",
+  "邀请": "Invite",
+  "邀请奖励": "Invite rewards",
+  "邀请榜": "Invite leaderboard",
+  "铸造": "Mint",
+  "铸造中 · 已开池": "Minting · Pool open",
+  "铸造中 · 46% 开池": "Minting · Pool opens at 46%",
+  "铸造份数上限": "Max mintable shares",
+  "铸造门槛": "Mint requirement",
+  "销毁 +": "Burn +",
+  "问答": "FAQ",
+  "需支付": "Pay",
+  "预计到手": "You'll receive",
+  "10 天总奖励": "Total 10-day reward",
+  "领取": "Claim",
+  "额度 +1": "Quota +1",
+  "额度加成": "Quota bonus",
+  "风险提示": "Risk warning",
+  "持有 Agent ID 就能铸造 $YAGENT。规则全部写在合约里：单价 0.0013 BNB 起，每档 +30%；Pool A 每份 2,000,000 枚起，每 1,000 份减半；Pool B 每份 20,000,000 枚起，每 10,000 份减半；46% 铸造后自动开池 3x；邀请好友每人让你的免费额度 +1。": "Holding an Agent ID lets you mint $YAGENT. All rules are written in the contract: price from 0.0013 BNB, +30% per tier; Pool A rewards from 2,000,000 tokens per share, halving every 1,000 mints; Pool B from 20,000,000, halving every 10,000 mints; the pool opens automatically at 46% minted at 3x; each friend you invite adds +1 to your free quota.",
+  "免费铸造：奖励 24 小时后解锁，押金一同退回。": "Free mint: rewards unlock after 24 hours, and the deposit is returned together with them.",
+  "每天免费铸造 1 份": "1 free share a day",
+  "免费铸造（Mode A）：每份交 0.0013 BNB 押金，24 小时后奖励与本金一同退回。资金池铸造（Mode B）：BNB 进入销售金库，46% 后自动开池；奖励 10 天线性释放。": "Free mint (Mode A): pay a 0.0013 BNB deposit per share; after 24 hours the reward and the principal are returned together. Pool mint (Mode B): BNB goes to the sale vault, the pool opens automatically at 46%; rewards vest linearly over 10 days.",
+  "管理钱包：开关铸造、暂停新铸造最多 7 天（领取与赎回不受影响，不影响二级交易）、转移或放弃管理权": "Admin wallet: turn minting on/off, pause new mints for up to 7 days (claims and redemptions unaffected, secondary trading unaffected), transfer or renounce admin rights",
+  "税费：买 2%、卖 2%（1% 自动加流动性 + 1% 进金库）": "Taxes: 2% on buys, 2% on sells — 1% auto-liquidity + 1% to the vault",
+  "资金池铸造（Mode B）持续注入流动性，池子越铸越深": "Pool minting (Mode B) keeps adding liquidity — the more minted, the deeper the pool",
+  "铸造、领取与赎回全部由合约按预设规则执行": "Minting, claiming and redemption are all executed by the contract under preset rules",
+  "开池前转账锁定；开池后自由交易": "Transfers are locked until the pool opens; free trading after that",
+  "持有 Agent ID（.ai）的钱包。每天免费额度 1 份，邀请好友每人 +1，没有上限。（主网使用 SPACE ID 真实注册表，只有持有 Agent ID 的钱包才能铸造。）": "A wallet holding an Agent ID (.ai). Free quota is 1 share a day; each friend you invite adds +1, with no cap. (Mainnet uses the real SPACE ID registry — only wallets holding an Agent ID can mint.)",
+  "交易对将在铸造满 46% 后自动在 PancakeSwap 开池；开池前代币转账锁定（铸造与领取不受影响），开池后自由交易。": "The trading pair will open automatically on PancakeSwap once 46% is minted; transfers are locked until the pool opens (minting and claims are unaffected), and trading is free after that.",
+  "没有 BNB 返利；好友用你的链接第一次铸造，你的免费铸造额度 +1，上不封顶。": "There is no BNB rebate; when a friend mints for the first time through your link, your free-mint quota goes up by 1, with no cap.",
+  "每天免费额度 1 份；每邀请 1 人第一次铸造，额度 +1，上不封顶。": "Free quota is 1 share a day; each person you invite who mints for the first time adds +1, with no cap.",
+  "在上方填入你的 Binance Agent ID，选模式 A 或 B，复制指令给你的 Binance agent 执行；先给预览，你确认后才执行。不需要连接钱包。": "Enter your Binance Agent ID above, pick mode A or B, copy the prompt to your Binance agent and let it execute; it shows a preview first and runs only after you confirm. No wallet connection needed.",
+  "管理钱包只能开关铸造、暂停新铸造最多 7 天（领取与赎回不受影响），且可以转移或放弃管理权；没有增发、修改税率、冻结资产或转走用户资金的权限。": "The admin wallet can only turn minting on/off, pause new mints for up to 7 days (claims and redemptions unaffected), and transfer or renounce admin rights. It cannot mint more tokens, change tax rates, freeze assets, or move user funds.",
+  "开池时 LP 凭证直接打入黑洞地址销毁，任何人都无法撤走；铸造合约里也没有撤走流动性的功能。合约参数部署后固定，规则对所有人一样。": "When the pool opens, the LP tokens are sent to the dead address and burned — nobody can remove them; the mint contract has no function to remove liquidity either. Contract parameters are fixed at deployment, and the rules are the same for everyone.",
+  "没有的权限：增发、修改税率、冻结资产、转走或提取用户资金、撤出流动性": "Permissions it does NOT have: minting more tokens, changing tax rates, freezing assets, moving or withdrawing user funds, or removing liquidity",
+  "暂无邀请榜 — 合约只记录每个人的邀请数，不保存全网排名。": "No invite leaderboard yet — the contract only records each person's invite count, not a global ranking.",
+  "复制指令给 agent": "Copy prompt for your agent",
+  "复制短指令": "Copy short command",
+  "Agent ID（Binance .ai）": "Agent ID (Binance .ai)",
+  "推荐人（可选）": "Referrer (optional)",
+  "给 agent 的指令（随 Agent ID、份数、模式、推荐人更新）": "Prompt for your agent (updates with Agent ID, shares, mode, referrer)",
+  "复制邀请链接": "Copy invite link",
+  "粘贴你的钱包地址，生成专属邀请链接。": "Paste your wallet address to generate your invite link.",
+  "只用 Agent ID 就能铸造：填入 ID，复制指令给你的 Binance agent。所有操作先给预览，你确认后才执行；领取 A 要满 24 小时，B 奖励 10 天线性释放。": "Mint with just your Agent ID: enter it, copy the prompt to your Binance agent. Every action shows a preview first and runs only after you confirm; A claims unlock after 24 hours, B rewards vest over 10 days.",
+  "24 小时": "24 hours",
+  "档": "Tier",
+  "份数": "Shares",
+  "单价": "Price",
+  "每份奖励": "Reward / share",
+  "POOL A · 免费铸造": "POOL A · Free mint",
+  "POOL B · 资金池铸造": "POOL B · Pool mint",
+  "资金池铸造 · 46% 后自动开池，奖励 10 天线性释放": "Pool mint · auto-opens at 46%, rewards vest over 10 days",
+  "下一份": "Next",
+  "买入税": "Buy tax",
+  "交易对": "Trading pair",
+  "什么时候可以交易？": "When can I trade?",
+  "今日免费剩余额度": "Free quota left today",
+  "代币": "Token",
+  "代币总量上限": "Max token supply",
+  "代币总量多少？": "What is the total token supply?",
+  "价格": "Price",
+  "价格阶梯": "Price tiers",
+  "份": "shares",
+  "全程链上执行，参数部署即固定，对所有人一样": "Everything runs on-chain; parameters are fixed at deployment and identical for everyone",
+  "全网已铸造": "Total minted",
+  "分享链接": "Share link",
+  "单笔上限": "Max per transaction",
+  "卖出税": "Sell tax",
+  "取消": "Cancel",
+  "可领取": "Claimable",
+  "合约不设 BNB 返利；好友用你的链接第一次铸造，你的免费铸造额度 +1。": "The contract pays no BNB rebate; when a friend mints for the first time through your link, your free-mint quota goes up by 1.",
+  "合约权限（公开说明）": "Contract permissions (public disclosure)",
+  "合约没有等级与返利排名；每邀请 1 人，你的免费铸造额度 +1。邀请数据请用「查询额度与仓位」指令问你的 agent。": "The contract has no levels or rebate ranking; each person you invite adds +1 to your free-mint quota. Ask your agent for your invite data with the 'Check quota & positions' prompt.",
+  "合约自治": "Contract autonomy",
+  "合约规则": "Contract rules",
+  "好友第一次铸造，哪怕只有 1 份，你的免费铸造额度就 +1，上不封顶。": "When a friend mints for the first time — even just 1 share — your free-mint quota goes up by 1, with no cap.",
+  "已开池": "Pool open",
+  "已邀请": "Invited",
+  "已铸造": "Minted",
+  "币安钱包": "Binance Wallet",
+  "开池前后都算": "Counts before and after the pool opens",
+  "待解锁": "Locked",
+  "总量": "Total supply",
+  "我的": "My",
+  "所需积分": "Points needed",
+  "持有 Agent ID": "Hold an Agent ID",
+  "数字资产价格波动大，可能归零。铸造由你的 Binance agent 执行：先给你看交易预览，你确认后才执行，项目不承诺任何收益，请只用能承受损失的资金参与。": "Digital asset prices are volatile and can go to zero. Minting is executed by your Binance agent: it shows you the transaction preview first and executes only after you confirm; the project promises no returns. Only participate with funds you can afford to lose.",
+  "数字资产价格波动大，请只用你能承受损失的资金参与。": "Digital asset prices are volatile — only participate with funds you can afford to lose.",
+  "状态": "Status",
+  "Agentic Wallet 扫码": "Agentic Wallet · Scan",
+  "Board / 合约不设全网排名，只记录你的邀请数": "Board / No global ranking in the contract — only your own invite count",
+  "Epochs / 20 档 · Pool A 10 档 × 1,000 份 · Pool B 10 档 × 10,000 份 · 单价 0.0013 BNB 起，每档 +30%": "Epochs / 20 tiers · Pool A 10 tiers × 1,000 shares · Pool B 10 tiers × 10,000 shares · price from 0.0013 BNB, +30% per tier",
+  "Mint / 持 Agent ID 铸造 $YAGENT": "Mint / Mint $YAGENT with an Agent ID",
+  "Mode A（免费铸造）：每份奖励在铸造后 24 小时解锁，领取时代币与押金一同到账。倒计时结束后点击领取即可。": "Mode A (free mint): each share's reward unlocks 24 hours after minting; on claim, the tokens and the deposit arrive together. Just click Claim once the countdown ends.",
+  "Mode B（资金池铸造）：BNB 进入销售金库；铸造满 46% 后自动开池，价格约为首档的 3 倍；奖励 10 天线性释放，可随时领取已释放部分。": "Mode B (pool mint): BNB goes to the sale vault; once 46% is minted the pool opens automatically at about 3x the first tier's price; rewards vest linearly over 10 days and the vested part can be claimed anytime.",
+  "My Mints / 我的铸造": "My Mints",
+  "Query / 点开看答案": "FAQ / Tap to see the answer",
+  "Rules / 全部写在合约里": "Rules / Everything is written in the contract",
+  "万亿枚": " trillion tokens",
+  "万枚": " ten thousand tokens",
+  "总量上限 5400 亿枚：创作者 5%（270 亿）、流动性储备 20%（1080 亿）、铸造奖励 75%（4050 亿），按份发放。": "Max supply 540 billion: creator 5% (27B), liquidity reserve 20% (108B), mint rewards 75% (405B), paid out per share minted.",
+  "亿枚": " hundred million tokens",
+  "每天免费额度": "Daily free quota",
+  "复制指令": "Copy prompt",
+  "邀请奖励": "Invite rewards",
+  "王者": "King",
+  "白银": "Silver",
+  "钻石": "Diamond",
+  "铂金": "Platinum",
+  "黄金": "Gold",
+  "青铜": "Bronze",
+  "大师": "Master"
+};
+  var _origText = new WeakMap();
+  function applyLang(lang){
+    LANG = lang;
+    try{ localStorage.setItem("at_lang", lang); }catch(e){}
+    try{ document.documentElement.lang = lang === "en" ? "en" : "zh-CN"; }catch(e){}
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var nodes = [], nd;
+    while((nd = walker.nextNode())) nodes.push(nd);
+    nodes.forEach(function(node){
+      var par = node.parentNode;
+      if(par && (par.tagName === "SCRIPT" || par.tagName === "STYLE" || par.tagName === "NOSCRIPT")) return;
+      var txt = node.textContent, trimmed = txt.trim();
+      if(!trimmed) return;
+      if(lang === "en"){
+        var rep = I18N[trimmed];
+        if(rep === undefined) return;
+        if(!_origText.has(node)) _origText.set(node, txt);
+        var lead = txt.match(/^\s*/)[0], trail = txt.match(/\s*$/)[0];
+        node.textContent = lead + rep + trail;
+      } else {
+        if(_origText.has(node)) node.textContent = _origText.get(node);
+      }
+    });
+    var lb = document.getElementById("langBtn");
+    if(lb) lb.textContent = lang === "en" ? "中文" : "EN";
+    var _fp = document.querySelector(".fineprint");
+    if(_fp) _fp.textContent = t("主网：单价 0.0013 BNB 起，每档 +30%；agent 执行前会先读链上实时报价并给你看预览，确认后才执行。", "Mainnet: price from 0.0013 BNB per share, +30% per tier; your agent reads the live on-chain price before executing and shows you a preview — it executes only after you confirm.");
+    renderPrompt();
+    renderMine();
+    if(typeof window.__renderSwap==="function") window.__renderSwap();
+  }
+  /* ===== YAGENT — mint via Binance agent (no web3 on this page) =====
+     The page never connects a wallet and never reads the chain. The user
+     enters a Binance Agent ID, the page builds a copy-paste prompt, and
+     their Binance Agentic Wallet agent executes the mint after showing
+     a preview. Only Agent ID holders can mint (enforced on-chain by the
+     SPACE ID registry). */
+  var Y_TOKEN = "0x84b8eaf7e09270624e8562b7f0be2835642d6e67";
+  var Y_MINTER = "0xe2467884f9485ac8a4136199bc93d93c76a5a211";
+  var Y_VAULT = "0x3d0a26a4930cfb540a6d030415bc91ba0a7f122b";
+  var Y_REGISTRY = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
+  var Y_EXPLORER = "https://bscscan.com";
+  var mode = "A";
+  var shares = 1;
+  var agentId = "";
+  var refText = "";
+  window.YAGENT_MODE = "A";
+  function el(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function fmtN(n){ return n.toLocaleString("en-US"); }
+  function showToast(msg){
+    var toast = document.getElementById("toast");
+    if(!toast) return;
+    toast.textContent = msg; toast.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ toast.classList.remove("show"); }, 3200);
+  }
+  function copyText(txt, okMsg){
+    function done(ok){ showToast(ok ? okMsg : t("复制失败，请手动复制", "Copy failed, please copy manually")); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ done(false); }); }
+    else { var ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select(); try{ done(document.execCommand("copy")); }catch(e){ done(false); } document.body.removeChild(ta); }
+  }
+  function payStr(n){ return (n*0.0013).toFixed(4).replace(/0+$/,"").replace(/\.$/,".0"); }
+  function agentPrompt(bodyZh, bodyEn){
+    var head;
+    if(LANG === "zh"){
+      head = "用我的 Binance Agentic Wallet 执行以下任务，" + (agentId ? "我的 Binance Agent ID 是 " + agentId + "。" : "使用我持有的 Binance .ai Agent ID。") + "若当前环境未内置 Agentic Wallet skill，先安装：\nnpx skills add binance/binance-skills-hub --skill binance-agentic-wallet\n若需要登录，我完成登录后会回复「继续」，届时从这里接着执行。\n合约（BSC 主网 chain 56）：代币 YOURAGENT " + Y_TOKEN + "，铸造合约 " + Y_MINTER + "，销售金库 " + Y_VAULT + "，Agent ID 注册表（SPACE ID）" + Y_REGISTRY + "。BscScan：" + Y_EXPLORER + "/address/" + Y_MINTER + "。\n";
+      return head + bodyZh;
+    }
+    head = "Use my Binance Agentic Wallet for this task. " + (agentId ? "My Binance Agent ID is " + agentId + "." : "Use the Binance .ai Agent ID I hold.") + " If the Agentic Wallet skill is not built in, install it first:\nnpx skills add binance/binance-skills-hub --skill binance-agentic-wallet\nIf sign-in is needed, I will reply \"continue\" after signing in; resume from here then.\nContracts (BSC mainnet, chain 56): token YOURAGENT " + Y_TOKEN + ", minter " + Y_MINTER + ", sale vault " + Y_VAULT + ", Agent ID registry (SPACE ID) " + Y_REGISTRY + ". BscScan: " + Y_EXPLORER + "/address/" + Y_MINTER + ".\n";
+    return head + bodyEn;
+  }
+  function mintPrompt(){
+    var refZh = refText ? "，推荐人 " + refText : "，不填推荐人";
+    var refEn = refText ? ", with referrer " + refText : ", with no referrer";
+    if(mode === "A"){
+      return agentPrompt(
+        "先查询我今天 Mode A 还剩多少免费额度，只铸造额度内的份数（最多 " + shares + " 份），在 BSC 主网 mint YAGENT（$YAGENT），模式 A（免费铸造，mintFree），每份交 0.0013 BNB 押金，24 小时后奖励与押金一同退回" + refZh + "。\n执行前先读链上实时价格与额度（quota()），把交易预览给我看，我确认后再执行。",
+        "first check how much free Mode A quota I have left today and mint only within that quota (at most " + shares + " shares): mint YAGENT ($YAGENT) on BSC mainnet, mode A (free mint, mintFree), 0.0013 BNB deposit per share, refunded with the reward after 24 hours" + refEn + ".\nBefore executing, read the live on-chain price and quota (quota()), show me the transaction preview, and execute only after I confirm.");
+    }
+    return agentPrompt(
+      "在 BSC 主网 mint " + shares + " 份 YAGENT（$YAGENT），模式 B（资金池铸造，mintPool），预计付 " + payStr(shares) + " BNB（第 1 档单价 0.0013 BNB，每档 +30%；以链上实时报价为准）" + refZh + "。\n奖励每份 20,000,000 起，每 10,000 份减半，10 天线性释放；每天最多 10 份。\n执行前先读链上实时价格与额度（quota()），把交易预览给我看，我确认后再执行。",
+      "mint " + shares + " shares of YAGENT ($YAGENT) on BSC mainnet, mode B (pool mint, mintPool), paying about " + payStr(shares) + " BNB (tier-1 price 0.0013 BNB per share, +30% per tier; confirm against the live on-chain price)" + refEn + ".\nRewards start at 20,000,000 per share, halving every 10,000 mints, vesting linearly over 10 days; at most 10 shares a day.\nBefore executing, read the live on-chain price and quota (quota()), show me the transaction preview, and execute only after I confirm.");
+  }
+  var ACTION_PROMPTS = [
+    { key: "status",
+      titleZh: "查询额度与仓位", titleEn: "Check quota & positions",
+      descZh: "今天 A / B 还剩多少份、每笔仓位的倒计时、现在可领的 BNB 与 YAGENT",
+      descEn: "A / B shares left today, the countdown on each position, BNB and YAGENT claimable now",
+      bodyZh: "查询并告诉我：今天 A / B 模式各剩多少额度、每一笔仓位的倒计时、现在可以领取的 BNB 与 YAGENT。只查询，不要执行任何交易。",
+      bodyEn: "look up and tell me: how much A / B quota I have left today, the countdown on each of my positions, and the BNB and YAGENT I can claim now. Query only — do not execute any transaction." },
+    { key: "claimA",
+      titleZh: "领取 A · claimFree", titleEn: "Claim A · claimFree",
+      descZh: "领回所有已满 24 小时的 A 仓位：BNB 押金全额退回 + YAGENT 到账",
+      descEn: "Claim every A position past 24h: full BNB deposit refund + YAGENT paid out",
+      bodyZh: "领取我所有已满 24 小时的 A 仓位（claimFree([])），BNB 押金全额退回，YAGENT 到账。先把预览给我看，我确认后再执行。",
+      bodyEn: "claim all my A positions that are past 24 hours (claimFree([])): full BNB deposit refund plus YAGENT paid out. Show me the preview first and execute only after I confirm." },
+    { key: "claimB",
+      titleZh: "领取 B 奖励 · claimReward", titleEn: "Claim B rewards · claimReward",
+      descZh: "领取 B 仓位已线性释放的 YAGENT 奖励（10 天线性释放）",
+      descEn: "Claim the YAGENT rewards my B positions have vested so far (10-day linear vesting)",
+      bodyZh: "领取我 B 仓位已经释放的奖励（claimReward([])）。先把预览给我看，我确认后再执行。",
+      bodyEn: "claim the vested rewards from my B positions (claimReward([])). Show me the preview first and execute only after I confirm." }
+  ];
+  function renderPrompt(){
+    var qn = el("qtyNum"); shares = qn ? (parseInt(qn.textContent, 10) || 1) : 1;
+    var pb = el("promptBox"); if(pb) pb.textContent = mintPrompt();
+    var cl = el("cmdLine"); if(cl) cl.textContent = "$ yagent mint " + (mode === "A" ? "--free" : "--pool") + " --shares " + shares;
+    var mt = el("mintTitle");
+    if(mt) mt.textContent = mode === "A" ? t("每天免费铸造 1 份", "1 free share a day") : t("资金池铸造 · 每天最多 10 份", "Pool mint · up to 10 shares a day");
+    var mn = el("mintNote");
+    if(mn) mn.textContent = mode === "A" ? t("免费铸造：奖励 24 小时后解锁，押金一同退回。", "Free mint: rewards unlock after 24 hours, and the deposit is returned together with them.") : t("资金池铸造：BNB 进入销售金库，46% 铸造后自动开池；奖励 10 天线性释放。", "Pool mint: BNB goes to the sale vault, the pool opens automatically at 46%; rewards vest linearly over 10 days.");
+    var lv = el("lockVal");
+    if(lv) lv.textContent = mode === "A" ? t("24 小时", "24 hours") : t("10 天线性释放", "10-day linear vesting");
+    var ps = el("perShareVal");
+    if(ps) ps.textContent = fmtN(mode === "B" ? 20000000 : 2000000) + t(" 枚", " tokens");
+    var vtr = el("vestTotalRow");
+    if(vtr) vtr.style.display = mode === "B" ? "" : "none";
+    var vt = el("vestTotal");
+    if(vt) vt.textContent = "≈ " + fmtN(shares * 20000000) + " YAGENT";
+    var payEl = el("payAmt"); if(payEl) payEl.textContent = payStr(shares) + " BNB";
+    var getEl = el("getAmt"); if(getEl) getEl.textContent = "≈ " + fmtN(shares * (mode === "B" ? 20000000 : 2000000)) + " YAGENT";
+    var ai = el("agentIdInput"); if(ai) ai.placeholder = t("例如：name.ai", "e.g. name.ai");
+    var ri = el("refInput"); if(ri) ri.placeholder = t("name.ai 或 0x 地址", "name.ai or a 0x address");
+  }
+  function setMode(m){
+    mode = m; window.YAGENT_MODE = m;
+    var a = el("modeBtnA"), b = el("modeBtnB");
+    if(a){ a.style.background = m === "A" ? "var(--grad)" : "transparent"; a.style.color = m === "A" ? "#fff" : "var(--y2)"; }
+    if(b){ b.style.background = m === "B" ? "var(--grad)" : "transparent"; b.style.color = m === "B" ? "#fff" : "var(--y2)"; }
+    renderPrompt();
+  }
+  var mBtnA = el("modeBtnA"); if(mBtnA) mBtnA.addEventListener("click", function(){ setMode("A"); });
+  var mBtnB = el("modeBtnB"); if(mBtnB) mBtnB.addEventListener("click", function(){ setMode("B"); });
+  ["qMinus","qPlus","qAll"].forEach(function(id){
+    var b = el(id); if(b) b.addEventListener("click", function(){ setTimeout(renderPrompt, 0); });
+  });
+  var mintBtn = el("mintBtn"); if(mintBtn) mintBtn.addEventListener("click", function(){ copyText(mintPrompt(), t("指令已复制，粘贴给你的 agent 执行", "Prompt copied — paste it to your agent")); });
+  var copyBtn = el("copyBtn"); if(copyBtn) copyBtn.addEventListener("click", function(){ var cl = el("cmdLine"); if(cl) copyText(cl.textContent, t("短指令已复制", "Short command copied")); });
+  function normId(raw){
+    var v = (raw || "").trim().toLowerCase().replace(/^@/, "");
+    if(v && v.slice(-3) !== ".ai") v = v + ".ai";
+    return v;
+  }
+  var idInput = el("agentIdInput");
+  if(idInput){
+    idInput.addEventListener("input", function(){
+      var st = el("idStatus"), raw = this.value.trim(), v = normId(raw);
+      if(!raw){ agentId = ""; if(st){ st.className = "refstatus"; st.textContent = ""; } }
+      else if(/^[a-z0-9_-]{2,30}\.ai$/.test(v)){ agentId = v; if(st){ st.className = "refstatus ok"; st.textContent = t("Agent ID：", "Agent ID: ") + v + t(" · 指令会带上它", " · included in the prompts"); } }
+      else { agentId = ""; if(st){ st.className = "refstatus bad"; st.textContent = t("格式不对：应为 name.ai", "Invalid format: should be name.ai"); } }
+      renderPrompt(); renderMine();
+    });
+  }
+  var refInput = el("refInput");
+  if(refInput){
+    refInput.addEventListener("input", function(){
+      var raw = this.value.trim(), st = el("refStatus");
+      if(!raw){ refText = ""; if(st){ st.className = "refstatus"; st.textContent = ""; } renderPrompt(); return; }
+      var ok = /^0x[0-9a-fA-F]{40}$/.test(raw) || /^[a-z0-9_-]{2,30}(\.ai)?$/i.test(raw.replace(/^@/, ""));
+      if(ok){ refText = raw; if(st){ st.className = "refstatus ok"; st.textContent = t("推荐人会写进指令；只在你的第一笔 mint 时绑定，之后再填不生效", "The referrer goes into the prompt; it binds on your first mint only"); } }
+      else { refText = ""; if(st){ st.className = "refstatus bad"; st.textContent = t("推荐人格式：name.ai 或 0x 地址", "Referrer format: name.ai or a 0x address"); } }
+      renderPrompt();
+    });
+  }
+  function renderMine(){
+    var box = el("mineBox"); if(!box) return;
+    if(!agentId){
+      box.innerHTML = '<div style="border:1px dashed rgba(255,255,255,.35);padding:18px;text-align:center">'
+        + '<div style="font-size:14px;line-height:1.8;margin-bottom:12px">' + t("在上方填入你的 Binance Agent ID 后，这里会出现查询额度与仓位、领取 A / B 的指令，复制给你的 agent 执行。", "Enter your Binance Agent ID above, and this section gives you the prompts — check quota and positions, claim A / B — to copy to your agent.") + '</div>'
+        + '<button type="button" id="meId" style="background:var(--grad);color:#fff;border:none;font-size:15px;font-weight:700;padding:10px 20px;cursor:pointer">' + t("填入 Agent ID", "Enter Agent ID") + '</button></div>';
+      var b = el("meId");
+      if(b) b.onclick = function(){
+        if(window.__showPage) window.__showPage("mint-free");
+        var i = el("agentIdInput");
+        if(i){ setTimeout(function(){ i.scrollIntoView({behavior:"smooth", block:"center"}); try{ i.focus(); }catch(e){} }, 120); }
+      };
+      return;
+    }
+    var h = '<div style="display:flex;flex-wrap:wrap;gap:18px 36px;margin-bottom:8px"><div><div class="lab">Agent ID</div><div class="val" style="font-size:18px">' + esc(agentId) + '</div></div></div>';
+    ACTION_PROMPTS.forEach(function(a, i){
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.2)">'
+        + '<div><div style="font-size:15px;font-weight:700">' + esc(LANG === "en" ? a.titleEn : a.titleZh) + '</div>'
+        + '<div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">' + esc(LANG === "en" ? a.descEn : a.descZh) + '</div></div>'
+        + '<button type="button" data-act="' + i + '" style="flex:none;background:transparent;color:var(--y2);border:2px solid var(--y2);font-size:14px;font-weight:700;padding:8px 14px;cursor:pointer">' + t("复制指令", "Copy prompt") + '</button></div>';
+    });
+    box.innerHTML = h;
+    box.querySelectorAll("[data-act]").forEach(function(btn){
+      btn.onclick = function(){
+        var a = ACTION_PROMPTS[Number(btn.getAttribute("data-act"))];
+        copyText(agentPrompt(a.bodyZh, a.bodyEn), t("指令已复制，粘贴给你的 agent 执行", "Prompt copied — paste it to your agent"));
+      };
+    });
+  }
+  /* ---------- swap estimator (MENUKAR): display only, no web3 ----------
+     Rate is tone-specified: 0.0013 BNB -> 7,000,000 YAGENT per share.
+     The estimator scales at that rate: YAGENT out = BNB * 7,000,000 / tierPrice().
+     tierPrice() comes from script 1 (exposed as window.__tierPrice); 0.0013 is
+     the fallback if the bridge is ever missing. No swap is executed here. */
+  var SWAP_YAG_PER_SHARE = 7000000;
+  function swapTierPrice(){ return (typeof window.__tierPrice==="function") ? window.__tierPrice() : 0.0013; }
+  function swapEpoch(){ return (typeof window.__epochOf==="function") ? window.__epochOf() : 1; }
+  function swapRate(){ return SWAP_YAG_PER_SHARE / swapTierPrice(); }
+  function fmtYag(n){
+    if(!isFinite(n)||n<=0) return "0";
+    if(n>=1000) return Math.round(n).toLocaleString("en-US");
+    var r=Math.round(n*100)/100;
+    return r.toLocaleString("en-US",{maximumFractionDigits:2});
+  }
+  function fmtBnbTiny(n){
+    if(!isFinite(n)||n<=0) return "0";
+    return n.toFixed(12).replace(/0+$/,"").replace(/\.$/,"");
+  }
+  function renderSwap(){
+    var inp=el("swapBnbInput"); if(!inp) return;
+    var amt=parseFloat(String(inp.value).replace(/,/g,"").trim());
+    if(!isFinite(amt)||amt<0) amt=0;
+    var rate=swapRate();
+    var getEl=el("swapGetAmt");
+    if(getEl) getEl.textContent="≈ "+fmtYag(amt*rate);
+    var r1=el("swapRateBnb");
+    if(r1) r1.textContent="1 BNB ≈ "+fmtYag(rate)+" YAGENT";
+    var r2=el("swapRateYag");
+    if(r2) r2.textContent="1 YAGENT ≈ "+fmtBnbTiny(1/rate)+" BNB";
+    var tn=el("swapTierNote");
+    if(tn) tn.textContent=t("当前第 "+swapEpoch()+" 档 · 每档 +30%","Current tier "+swapEpoch()+" · +30% per tier");
+    var gn=el("swapGetNote");
+    if(gn) gn.textContent=t("按展示汇率估算 · 非市场价","Estimated at the displayed rate · not a market price");
+    try{ inp.placeholder=t("输入 BNB 数量","Enter BNB amount"); }catch(e){}
+    var chips=document.querySelectorAll(".swap-chip");
+    chips.forEach(function(c){
+      var v=parseFloat(c.getAttribute("data-swap-amt"));
+      c.classList.toggle("on", isFinite(v)&&Math.abs(v-amt)<1e-12);
+    });
+  }
+  window.__renderSwap=renderSwap;
+  (function(){
+    var inp=el("swapBnbInput"); if(!inp) return;
+    inp.addEventListener("input",renderSwap);
+    var chips=document.querySelectorAll(".swap-chip");
+    chips.forEach(function(c){
+      c.addEventListener("click",function(){ inp.value=c.getAttribute("data-swap-amt"); renderSwap(); try{inp.focus();}catch(e){} });
+    });
+    renderSwap();
+  })();
+  var invInput = el("invAddrInput");
+  if(invInput){
+    invInput.addEventListener("input", function(){
+      var raw = invInput.value.trim();
+      var st = el("invAddrStatus"), box = el("invLinkBox"), linkEl = el("invLink");
+      if(!raw){ if(st){ st.className = "refstatus"; st.textContent = ""; } if(box) box.style.display = "none"; return; }
+      if(/^0x[0-9a-fA-F]{40}$/.test(raw)){
+        var link = location.origin + location.pathname + "?ref=" + raw;
+        if(linkEl) linkEl.textContent = link;
+        if(box) box.style.display = "";
+        if(st){ st.className = "refstatus ok"; st.textContent = t("邀请链接已生成，好友第一次铸造时你的免费额度 +1。", "Invite link ready — when a friend mints for the first time through it, your free quota goes up by 1."); }
+      } else {
+        if(box) box.style.display = "none";
+        if(st){ st.className = "refstatus bad"; st.textContent = t("钱包地址格式不对，应为 0x + 40 位十六进制。", "Invalid address: 0x + 40 hex characters."); }
+      }
+    });
+  }
+  var invCopy = el("invCopyBtn");
+  if(invCopy) invCopy.addEventListener("click", function(){
+    var linkEl = el("invLink");
+    if(linkEl) copyText(linkEl.textContent, t("邀请链接已复制", "Invite link copied"));
+  });
+  var lt = document.getElementById("invLevelsTable"); if(lt) lt.style.display = "none";
+  var bw = document.getElementById("boardTableWrap"); if(bw) bw.style.display = "none";
+  setMode("A");
+  renderMine();
+  var _lb = document.getElementById("langBtn");
+  if(_lb){
+    var _nb = _lb.cloneNode(true);
+    _lb.parentNode.replaceChild(_nb, _lb);
+    _nb.addEventListener("click", function(){ applyLang(LANG === "en" ? "zh" : "en"); });
+  }
+  applyLang(LANG);
+
+})();
+</script>
+</body>
+</html>
