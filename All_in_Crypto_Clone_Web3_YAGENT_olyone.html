@@ -156,7 +156,6 @@ header.top{position:sticky;top:0;z-index:55;display:flex;align-items:center;gap:
 .refstatus.ok{color:#4ade80}
 .refstatus.bad{color:#fb7185}
 .promptbox{margin-top:6px;border:1px solid rgba(217,70,239,.5);background:rgba(0,0,0,.4);padding:12px 14px;font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:260px;overflow:auto}
-.cmdline{margin-top:8px;font-family:var(--mono);font-size:13px;color:var(--y2);word-break:break-all}
 .risk{border:1px solid rgba(217,70,239,.5);padding:12px 14px;font-size:13px;line-height:1.65;margin-top:16px}
 .risk b{font-weight:900}
 .fineprint{font-size:12.5px;color:var(--mut);margin-top:12px;line-height:1.6}
@@ -547,7 +546,6 @@ footer{margin-top:70px}
             <button class="yagent cut-sm" id="mintBtn" type="button">获取铸造指令</button>
           </div>
           <div class="promptbox" id="promptBox" aria-live="polite"></div>
-          <div class="cmdline" id="cmdLine"></div>
           <div style="margin-top:10px">
             <button class="yagent cut-sm" id="copyBtn" type="button">复制铸造指令</button>
           </div>
@@ -1361,7 +1359,6 @@ setMode("A");
   "没有的权限：增发、修改税率、冻结资产、转走或提取用户资金、撤出流动性": "Permissions it does NOT have: minting more tokens, changing tax rates, freezing assets, moving or withdrawing user funds, or removing liquidity",
   "暂无邀请榜 — 合约只记录每个人的邀请数，不保存全网排名。": "No invite leaderboard yet — the contract only records each person's invite count, not a global ranking.",
   "复制指令给 agent": "Copy prompt for your agent",
-  "复制短指令": "Copy short command",
   "Agent ID（Binance .ai）": "Agent ID (Binance .ai)",
   "推荐人（可选）": "Referrer (optional)",
   "给 agent 的指令（随 Agent ID、份数、模式、推荐人更新）": "Prompt for your agent (updates with Agent ID, shares, mode, referrer)",
@@ -1544,7 +1541,6 @@ setMode("A");
   function renderPrompt(){
     var qn = el("qtyNum"); shares = qn ? (parseInt(qn.textContent, 10) || 1) : 1;
     var pb = el("promptBox"); if(pb) pb.textContent = mintPrompt();
-    var cl = el("cmdLine"); if(cl) cl.textContent = "$ yagent mint " + (mode === "A" ? "--free" : "--pool") + " --shares " + shares;
     var mt = el("mintTitle");
     if(mt) mt.textContent = mode === "A" ? t("每天免费铸造 1 份", "1 free share a day") : t("资金池铸造 · 每天最多 10 份", "Pool mint · up to 10 shares a day");
     var mn = el("mintNote");
@@ -1575,7 +1571,7 @@ setMode("A");
     var b = el(id); if(b) b.addEventListener("click", function(){ setTimeout(renderPrompt, 0); });
   });
   var mintBtn = el("mintBtn"); if(mintBtn) mintBtn.addEventListener("click", function(){ copyText(mintPrompt(), t("指令已复制，粘贴给你的 agent 执行", "Prompt copied — paste it to your agent")); });
-  var copyBtn = el("copyBtn"); if(copyBtn) copyBtn.addEventListener("click", function(){ var cl = el("cmdLine"); if(cl) copyText(cl.textContent, t("短指令已复制", "Short command copied")); });
+  var copyBtn = el("copyBtn"); if(copyBtn) copyBtn.addEventListener("click", function(){ copyText(mintPrompt(), t("指令已复制，粘贴给你的 agent 执行", "Prompt copied — paste it to your agent")); });
   function normId(raw){
     var v = (raw || "").trim().toLowerCase().replace(/^@/, "");
     if(v && v.slice(-3) !== ".ai") v = v + ".ai";
