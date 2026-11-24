@@ -710,14 +710,6 @@ footer{margin-top:70px}
           <div class="pl-lab">奖励池</div>
           <div class="tot-row"><span>奖励池可用</span><span><b>—</b> / 5,400,000,000</span></div>
           <div class="tot-row"><span>年化规则</span><span><b>20% → 5%</b></span></div>
-          <p class="cd" style="margin-top:14px">年化最高 20%/年，每增加 100 名质押者下降 0.3%，最低 5%。灵活质押，随时解除，无锁仓。</p>
-          <div class="payrows">
-            <div class="payrow"><span>0–99 名质押者</span><b>20.0%</b></div>
-            <div class="payrow"><span>100–199 名质押者</span><b>19.7%</b></div>
-            <div class="payrow"><span>200–299 名质押者</span><b>19.4%</b></div>
-            <div class="payrow"><span>5,000+ 名质押者</span><b>5.0%</b></div>
-          </div>
-          <p class="fineprint">奖励由 owner 提供的奖励池支付（5,400,000,000 YAGENT，即总供应量的 1%）。池子用完后奖励暂停，直到再次注资。无新增铸造 —— 总供应量保持 540B。</p>
         </div>
         <div class="card cut">
           <h3 id="stakeTitle">质押 $YAGENT</h3>
@@ -735,7 +727,7 @@ footer{margin-top:70px}
             <button type="button" class="chip stake-chip" data-stake-amt="100000000">100,000,000</button>
           </div>
           <div class="payrows">
-            <div class="payrow"><span>数量（wei）</span><b id="stakeWeiVal">1000000000000000000000000</b></div>
+            <div class="payrow"><span>总数量</span><b id="stakeWeiVal">1,000,000 YAGENT</b></div>
             <div class="payrow"><span>预计年奖励（按最高 20%）</span><b id="stakeEstVal">≈ 200,000 YAGENT</b></div>
           </div>
           <label for="stakeAddrInput" style="display:block;margin-top:18px;font-size:13px;color:var(--mut)">你的钱包地址（选填）</label>
@@ -1170,19 +1162,13 @@ setMode("A");
   "奖励池": "Reward pool",
   "奖励池可用": "Pool available",
   "年化规则": "APY rule",
-  "年化最高 20%/年，每增加 100 名质押者下降 0.3%，最低 5%。灵活质押，随时解除，无锁仓。": "Up to 20% APY per year, falling 0.3% for every 100 extra stakers, floor 5%. Flexible staking, unstake anytime, no lock-up.",
-  "0–99 名质押者": "0–99 stakers",
-  "100–199 名质押者": "100–199 stakers",
-  "200–299 名质押者": "200–299 stakers",
-  "5,000+ 名质押者": "5,000+ stakers",
-  "奖励由 owner 提供的奖励池支付（5,400,000,000 YAGENT，即总供应量的 1%）。池子用完后奖励暂停，直到再次注资。无新增铸造 —— 总供应量保持 540B。": "Rewards are paid from an owner-funded pool (5,400,000,000 YAGENT, 1% of total supply). Rewards pause if the pool runs out until it is topped up again. No new minting — total supply stays 540B.",
   "质押 $YAGENT": "Stake $YAGENT",
   "本页面不连接钱包；质押由你的 Binance Agentic Wallet agent 执行，执行前先给你看预览。": "This page never connects a wallet; staking is executed by your Binance Agentic Wallet agent, which shows you a preview first.",
   "质押": "Stake",
   "解除质押": "Unstake",
   "领取奖励": "Claim rewards",
   "数量（$YAGENT）": "Amount ($YAGENT)",
-  "数量（wei）": "Amount (wei)",
+  "总数量": "Total YAGENT",
   "预计年奖励（按最高 20%）": "Est. yearly reward (at max 20%)",
   "你的钱包地址（选填）": "Your wallet address (optional)",
   "获取质押指令": "Get staking prompt",
@@ -1816,7 +1802,7 @@ setMode("A");
   function renderStake(){
     var box = el("stakePromptBox"); if(box) box.textContent = stakePrompt();
     var amt = stakeAmount(), wei = stakeToWei(amt);
-    var wv = el("stakeWeiVal"); if(wv) wv.textContent = stakeAction === "claim" ? "—" : wei;
+    var wv = el("stakeWeiVal"); if(wv) wv.textContent = stakeAction === "claim" ? "—" : fmtN(parseFloat(amt)) + " YAGENT";
     var ev = el("stakeEstVal");
     if(ev){
       if(stakeAction === "claim"){ ev.textContent = "—"; }
